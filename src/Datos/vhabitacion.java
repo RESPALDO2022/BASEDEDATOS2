@@ -2,11 +2,11 @@
 package Datos;
 
 /**
- *
+ *   
  * @author Sara Ramirez
  */
 public class vhabitacion {
-private int id_habitacion;
+private int idh_habitacion;   //declaracion de las variables de la tabla habitacion
 private String numero;
 private String piso;
 private String caracteristicas;
@@ -14,10 +14,10 @@ private Double precio;
 private String tipo;
 private String disponibilidad;
 
-    public vhabitacion(int id_habitacion, String numero, String piso, String caracteristicas, Double precio, String tipo, String disponibilidad) {
-        this.id_habitacion = id_habitacion;
+    public vhabitacion(int idh_habitacion, String numero, String piso, String caracteristicas, Double precio, String tipo, String disponibilidad) {
+        this.idh_habitacion = idh_habitacion;
         this.numero = numero;
-        this.piso = piso;
+        this.piso = piso;                               //constructor
         this.caracteristicas = caracteristicas;
         this.precio = precio;
         this.tipo = tipo;
@@ -27,12 +27,12 @@ private String disponibilidad;
     public vhabitacion() {
     }
 
-    public int getId_habitacion() {
-        return id_habitacion;
+    public int getIdh_habitacion() {          //metodos getters y setters 
+        return idh_habitacion;
     }
 
-    public void setId_habitacion(int id_habitacion) {
-        this.id_habitacion = id_habitacion;
+    public void setIdh_habitacion(int id_habitacion) {
+        this.idh_habitacion = id_habitacion;
     }
 
     public String getNumero() {
