@@ -107,14 +107,14 @@ public class fhabitacion {
     }
 
     public boolean eliminar(vhabitacion dts) {
-        sSQL = "delete from h_habitacion where idh_habitacion=?";
+        sSQL = "delete from h_habitacion where idh_habitacion=?";  // Borra los registros de la habitacion en el ID indicado
 
         try {
-            PreparedStatement pst = cn.prepareStatement(sSQL);
-            pst.setInt(1, dts.getIdh_habitacion());
-            int n = pst.executeUpdate();
+            PreparedStatement pst = cn.prepareStatement(sSQL); // prepara la cadena para poder insertar los registros
+            pst.setInt(1, dts.getIdh_habitacion());// El indice 1, es el ID habitacion para indicar que se elimina
+            int n = pst.executeUpdate(); //almacena el estado de la ejecucucion del Statement
 
-            if (n != 0) {
+            if (n != 0) {   //Revisa si esta vacio
                 return true;
             } else {
                 return false;
