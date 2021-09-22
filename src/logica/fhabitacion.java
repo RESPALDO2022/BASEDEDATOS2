@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class fhabitacion {
 
@@ -54,7 +55,7 @@ public class fhabitacion {
 
     public boolean insertar(vhabitacion dts) {   // Funcion insertar, recibe todo lo de la clase vhabitacion
         sSQL = "insert into h_habitacion(numero,piso,caracteristicas,precio,tipo,disponibilidad)"
-                + "values (?,?,?,?,?,?,?)";
+                + "values (?,?,?,?,?,?)";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setString(1, dts.getNumero()); //Enviar 1 a 1 todos los valores

@@ -3,6 +3,8 @@ package Formularios;
 import Datos.vhabitacion;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
+
 import logica.fhabitacion;
 
 
@@ -55,6 +57,7 @@ public class fmhabitacion extends javax.swing.JFrame {
     btncancelar.setEnabled(true);
     btneliminar.setEnabled(true);
     
+    txtnumero.setText("");
     txtidhabitacion.setText("");
     txtprecio.setText("");
     txtcaracteristicas.setText("");
@@ -149,7 +152,7 @@ public class fmhabitacion extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tablalistado);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Buscar");
+        jLabel8.setText("Piso:");
 
         txtbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
