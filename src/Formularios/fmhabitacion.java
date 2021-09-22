@@ -1,5 +1,6 @@
 
 package Formularios;
+import Datos.vhabitacion;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.fhabitacion;
@@ -9,6 +10,9 @@ public class fmhabitacion extends javax.swing.JFrame {
 
     public fmhabitacion() {
         initComponents();
+        
+        mostrar("");
+        inhabilitar();
     }
 
     private String accion="guardar"; // determina si la accion es guardar o editar
@@ -137,6 +141,11 @@ public class fmhabitacion extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablalistado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablalistadoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tablalistado);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -158,9 +167,19 @@ public class fmhabitacion extends javax.swing.JFrame {
 
         btneliminar.setBackground(new java.awt.Color(235, 191, 145));
         btneliminar.setText("Eliminar");
+        btneliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneliminarActionPerformed(evt);
+            }
+        });
 
         btnsalir.setBackground(new java.awt.Color(235, 191, 145));
         btnsalir.setText("Salir");
+        btnsalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsalirActionPerformed(evt);
+            }
+        });
 
         lbltotalregistros.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lbltotalregistros.setText("Registros");
@@ -214,10 +233,21 @@ public class fmhabitacion extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Número de habitación: ");
 
+        txtnumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnumeroActionPerformed(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Piso:");
 
         cbopiso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", " ", " " }));
+        cbopiso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbopisoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Características:");
@@ -239,11 +269,21 @@ public class fmhabitacion extends javax.swing.JFrame {
         jLabel6.setText("Disponibilidad:");
 
         cboestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "Ocupada", "Limpieza" }));
+        cboestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboestadoActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Tipo:");
 
         cbotipo_habitacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Individual", "Matrimonial", "Doble", "Familiar", "Presidencial" }));
+        cbotipo_habitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbotipo_habitacionActionPerformed(evt);
+            }
+        });
 
         btnnuevo.setBackground(new java.awt.Color(235, 191, 145));
         btnnuevo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -375,7 +415,7 @@ public class fmhabitacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtprecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprecioActionPerformed
-        // TODO add your handling code here:
+        txtprecio.transferFocus();
     }//GEN-LAST:event_txtprecioActionPerformed
 
     private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
@@ -383,7 +423,8 @@ public class fmhabitacion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtbuscarActionPerformed
 
     private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-        // TODO add your handling code here:
+       mostrar(txtbuscar.getText());
+       
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
@@ -411,7 +452,104 @@ public class fmhabitacion extends javax.swing.JFrame {
             return; 
         }
         
+        vhabitacion dts = new vhabitacion();//Crea un nuevo objeto de la clase vhabitacion
+        fhabitacion func = new fhabitacion();//Llama a todas las funciones de fhabitacion
+        
+        //Se asigna los datos de las cajas de texto a las variables 
+        dts.setNumero(txtnumero.getText());
+        
+        int seleccionado = cbopiso.getSelectedIndex();
+        dts.setPiso((String)cbopiso.getItemAt(seleccionado));
+        
+        dts.setCaracteristicas(txtcaracteristicas.getText());
+        dts.setCaracteristicas(txtcaracteristicas.getText());
+        
+        dts.setPrecio(Double.parseDouble(txtprecio.getText()));
+        
+        seleccionado = cboestado.getSelectedIndex();
+        dts.setDisponibilidad((String)cboestado.getItemAt(seleccionado));
+        
+        seleccionado = cbotipo_habitacion.getSelectedIndex();
+        dts.setTipo((String)cbotipo_habitacion.getItemAt(seleccionado));
+        
+        if (accion.equals("guardar")){//Condicion para verificar si se va a guardar o modificar
+            if(func.insertar(dts)){//Verifica que los datos se esten insertando correctamente
+                JOptionPane.showMessageDialog(rootPane, "La habitación fue registrada satisfactoriamente");
+                mostrar("");//Muestra todos los registros
+                inhabilitar();
+            }
+            
+        }
+        else if(accion.equals("editar")){//Condicion para editar
+            dts.setIdh_habitacion(Integer.parseInt(txtidhabitacion.getText()));//Convierte lo del getText a un Integer 
+            
+            
+            if(func.editar(dts)){
+                JOptionPane.showMessageDialog(rootPane, "La habitación fue editada satisfactoriamente");
+                mostrar(""); 
+                inhabilitar();
+            }
+        }
+        
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
+        if(!txtidhabitacion.getText().equals("")){//Verifica que no este vacia la habitacion que se va a eliminar
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar la habitación?","Confirmar",2);//Pregunta para confirmar la eliminacion
+            
+            if(confirmacion==0){//Procede a la eliminacion 
+                fhabitacion func = new fhabitacion();
+                vhabitacion dts = new vhabitacion();
+                
+                dts.setIdh_habitacion(Integer.parseInt(txtidhabitacion.getText()));
+                
+                func.eliminar(dts);
+                mostrar("");
+                inhabilitar();
+            }
+        }
+        
+    }//GEN-LAST:event_btneliminarActionPerformed
+
+    private void txtnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumeroActionPerformed
+        txtnumero.transferFocus();//Pasa automaticamente al siguiente campo
+    }//GEN-LAST:event_txtnumeroActionPerformed
+
+    private void cbopisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbopisoActionPerformed
+        cbopiso.transferFocus();
+    }//GEN-LAST:event_cbopisoActionPerformed
+
+    private void cboestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboestadoActionPerformed
+        cboestado.transferFocus();
+    }//GEN-LAST:event_cboestadoActionPerformed
+
+    private void cbotipo_habitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbotipo_habitacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbotipo_habitacionActionPerformed
+
+    private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
+        btnguardar.setText("editar");
+        habilitar();
+        btneliminar.setEnabled(true);
+        accion = "editar";
+        
+        int fila = tablalistado.rowAtPoint(evt.getPoint());//Almacena los registros donde se haya hecho click
+        
+        txtidhabitacion.setText(tablalistado.getValueAt(fila, 0).toString());
+        txtnumero.setText(tablalistado.getValueAt(fila, 1).toString());
+        cbopiso.setSelectedItem(tablalistado.getValueAt(fila, 2).toString());
+        txtcaracteristicas.setText(tablalistado.getValueAt(fila, 3).toString());
+        txtprecio.setText(tablalistado.getValueAt(fila, 4).toString());
+        
+        cboestado.setSelectedItem(tablalistado.getValueAt(fila, 5).toString());
+        cbotipo_habitacion.setSelectedItem(tablalistado.getValueAt(fila, 6).toString());
+        
+    }//GEN-LAST:event_tablalistadoMouseClicked
+
+    private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
+        this.dispose();
+        
+    }//GEN-LAST:event_btnsalirActionPerformed
 
     /**
      * @param args the command line arguments
