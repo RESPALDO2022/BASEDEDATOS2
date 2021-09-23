@@ -26,7 +26,7 @@ public class fcliente {
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);  // agregar titulos que ya se tienen 
 
-        sSQL = "select  p.idh_persona,p.nombre,p.apellido,p.cui.p.direccion,p.celular,c.codigo_cliente from h_persona p inner join h_cliente c "
+        sSQL = "select p.idh_persona,p.nombre,p.apellido,p.cui,p.direccion,p.celular,c.codigo_cliente from h_persona p inner join h_cliente c "
                 + "on p.idh_persona=c.idh_persona where cui like '%"
                 + buscar + "%' order by idh_persona desc "; //Consulta para obtener los registros de la tabla
 
@@ -60,7 +60,7 @@ public class fcliente {
                 + "values (?,?,?,?,?)";
 
         sSQL2 = "insert into h_cliente(idh_persona,codigo_cliente)"
-                + "values (select idh_persona from h_persona order by idh_persona desc limit 1)";
+                + "values ((select idh_persona from h_persona order by idh_persona desc limit 1),?)";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);// prepara la cadena para poder insertar los registros
@@ -110,6 +110,7 @@ public class fcliente {
             pst.setString(4, dts.getDireccion());
             pst.setString(5, dts.getCelular());
             pst.setInt(6, dts.getIdh_persona());
+            
             pst2.setString(1, dts.getCodigo_cliente());
             pst2.setInt(2, dts.getIdh_persona());
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
