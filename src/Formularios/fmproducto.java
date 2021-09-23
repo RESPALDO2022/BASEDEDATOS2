@@ -1,15 +1,17 @@
 
 package Formularios;
 
+import Datos.vproductos;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import logica.fhabitacion;
 import logica.fproducto;
 
 public class fmproducto extends javax.swing.JFrame {
 
     public fmproducto() {
         initComponents();
+        mostrar("");
+        inhabilitar();
         
     }
     
@@ -254,6 +256,11 @@ public class fmproducto extends javax.swing.JFrame {
         btncancelar.setBackground(new java.awt.Color(235, 191, 145));
         btncancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btncancelar.setText("CANCELAR");
+        btncancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -281,10 +288,11 @@ public class fmproducto extends javax.swing.JFrame {
                         .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtprecio_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtprecio_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))
                         .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
@@ -333,45 +341,35 @@ public class fmproducto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(351, 351, 351)
                 .addComponent(jLabel1)
-                .addContainerGap(423, Short.MAX_VALUE))
+                .addContainerGap(441, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(450, 450, 450)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(ImagenFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 940, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(30, 30, 30)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(ImagenFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 958, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(439, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(50, 50, 50)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(ImagenFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(50, 50, 50)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(ImagenFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 489, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
-        btnguardar.setText("editar");
+        btnguardar.setText("EDITAR");
         habilitar();
         btneliminar.setEnabled(true);
         accion = "editar";
@@ -380,12 +378,8 @@ public class fmproducto extends javax.swing.JFrame {
 
         txtidproducto.setText(tablalistado.getValueAt(fila, 0).toString());
         txtnombre.setText(tablalistado.getValueAt(fila, 1).toString());
-        cbopiso.setSelectedItem(tablalistado.getValueAt(fila, 2).toString());
-        txtdescripcion.setText(tablalistado.getValueAt(fila, 3).toString());
-        txtprecio_venta.setText(tablalistado.getValueAt(fila, 4).toString());
-
-        cboestado.setSelectedItem(tablalistado.getValueAt(fila, 5).toString());
-        cbotipo_habitacion.setSelectedItem(tablalistado.getValueAt(fila, 6).toString());
+        txtdescripcion.setText(tablalistado.getValueAt(fila, 2).toString());
+        txtprecio_venta.setText(tablalistado.getValueAt(fila, 3).toString());
 
     }//GEN-LAST:event_tablalistadoMouseClicked
 
@@ -399,14 +393,14 @@ public class fmproducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        if(!txtidproducto.getText().equals("")){//Verifica que no este vacia la habitacion que se va a eliminar
-            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar la habitación?","Confirmar",2);//Pregunta para confirmar la eliminacion
+        if(!txtidproducto.getText().equals("")){//Verifica que no este vacio el producto que se va a eliminar
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar el producto?","Confirmar",2);//Pregunta para confirmar la eliminacion
 
             if(confirmacion==0){//Procede a la eliminacion
-                fhabitacion func = new fhabitacion();
-                vhabitacion dts = new vhabitacion();
+                fproducto func = new fproducto();
+                vproductos dts = new vproductos();
 
-                dts.setIdh_habitacion(Integer.parseInt(txtidproducto.getText()));
+                dts.setIdh_producto(Integer.parseInt(txtidproducto.getText()));
 
                 func.eliminar(dts);
                 mostrar("");
@@ -431,68 +425,61 @@ public class fmproducto extends javax.swing.JFrame {
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         habilitar(); // habilita todas las cajas de texto
-        btnguardar.setText("Guardar");
-        accion="guardar";
+        btnguardar.setText("GUARDAR");
+        accion="guardar";     
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         if (txtnombre.getText().length()==0){ //Valida que numero contenga datos
-            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un numero de habitacion");
+            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un nombre para el producto");
             txtnombre.requestFocus();
             return;
         }
 
         if (txtdescripcion.getText().length()==0){ //Valida que caracteristicas contenga datos
-            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar caracteristicas de habitacion");
+            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar una descripción para el producto");
             txtdescripcion.requestFocus();
             return;
         }
 
         if (txtprecio_venta.getText().length()==0){ //Valida que precio contenga datos
-            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar precio de habitacion");
+            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar precio del producto");
             txtprecio_venta.requestFocus();
             return;
         }
 
-        vhabitacion dts = new vhabitacion();//Crea un nuevo objeto de la clase vhabitacion
-        fhabitacion func = new fhabitacion();//Llama a todas las funciones de fhabitacion
+        vproductos dts = new vproductos();//Crea un nuevo objeto de la clase vproductos
+        fproducto func = new fproducto();//Llama a todas las funciones de fproductos
 
         //Se asigna los datos de las cajas de texto a las variables
-        dts.setNumero(txtnombre.getText());
-
-        int seleccionado = cbopiso.getSelectedIndex();
-        dts.setPiso((String)cbopiso.getItemAt(seleccionado));
-
-        dts.setCaracteristicas(txtdescripcion.getText());
-        dts.setCaracteristicas(txtdescripcion.getText());
-
+        dts.setNombre(txtnombre.getText());
+        dts.setDescripcion(txtdescripcion.getText());
         dts.setPrecio(Double.parseDouble(txtprecio_venta.getText()));
 
-        seleccionado = cboestado.getSelectedIndex();
-        dts.setDisponibilidad((String)cboestado.getItemAt(seleccionado));
-
-        seleccionado = cbotipo_habitacion.getSelectedIndex();
-        dts.setTipo((String)cbotipo_habitacion.getItemAt(seleccionado));
 
         if (accion.equals("guardar")){//Condicion para verificar si se va a guardar o modificar
             if(func.insertar(dts)){//Verifica que los datos se esten insertando correctamente
-                JOptionPane.showMessageDialog(rootPane, "La habitación fue registrada satisfactoriamente");
+                JOptionPane.showMessageDialog(rootPane, "El producto fue registrado correctamente");
                 mostrar("");//Muestra todos los registros
                 inhabilitar();
             }
 
         }
         else if(accion.equals("editar")){//Condicion para editar
-            dts.setIdh_habitacion(Integer.parseInt(txtidproducto.getText()));//Convierte lo del getText a un Integer
+            dts.setIdh_producto(Integer.parseInt(txtidproducto.getText()));//Convierte lo del getText a un Integer
 
             if(func.editar(dts)){
-                JOptionPane.showMessageDialog(rootPane, "La habitación fue editada satisfactoriamente");
+                JOptionPane.showMessageDialog(rootPane, "El producto fue editado correctamente");
                 mostrar("");
                 inhabilitar();
             }
         }
 
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btncancelarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -78,14 +78,6 @@ public class fmhabitacion extends javax.swing.JFrame {
     }
     }
     
-    
-    
-    
-    
-    
-    
-    
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -432,7 +424,7 @@ public class fmhabitacion extends javax.swing.JFrame {
 
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         habilitar(); // habilita todas las cajas de texto
-        btnguardar.setText("Guardar"); 
+        btnguardar.setText("GUARDAR"); 
         accion="guardar";     
     }//GEN-LAST:event_btnnuevoActionPerformed
 
@@ -531,7 +523,7 @@ public class fmhabitacion extends javax.swing.JFrame {
     }//GEN-LAST:event_cbotipo_habitacionActionPerformed
 
     private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
-        btnguardar.setText("editar");
+        btnguardar.setText("EDITAR");
         habilitar();
         btneliminar.setEnabled(true);
         accion = "editar";
