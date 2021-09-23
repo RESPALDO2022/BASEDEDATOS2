@@ -9,7 +9,7 @@ public class fmcliente extends javax.swing.JFrame {
 
     public fmcliente() {
         initComponents();
-        mostrar(" ");
+        mostrar("");
         inhabilitar();
 
     }
@@ -85,7 +85,6 @@ public class fmcliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImagenFondo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablalistado = new javax.swing.JTable();
@@ -95,6 +94,8 @@ public class fmcliente extends javax.swing.JFrame {
         btneliminar = new javax.swing.JButton();
         btnsalir = new javax.swing.JButton();
         lbltotalregistros = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        ImagenFondo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         txtidpersona = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -112,11 +113,8 @@ public class fmcliente extends javax.swing.JFrame {
         txtcelular = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtcodigo = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        ImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clientes.jpeg"))); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(249, 246, 232));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Clientes Registrados"));
@@ -216,6 +214,11 @@ public class fmcliente extends javax.swing.JFrame {
                 .addComponent(lbltotalregistros)
                 .addContainerGap())
         );
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
+        jLabel1.setText("CLIENTES");
+
+        ImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clientes.jpeg"))); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(249, 246, 232));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -372,9 +375,6 @@ public class fmcliente extends javax.swing.JFrame {
                     .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-
-        jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
-        jLabel1.setText("CLIENTES");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
