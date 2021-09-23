@@ -1,7 +1,6 @@
 package logica;
 
 import Datos.vcliente;
-import Datos.vproductos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +16,7 @@ public class fcliente {
     private String sSQL2 = "";//almacena la cadena de conexion
     public Integer totalregistros; // Total de registros tiene
 
-    public DefaultTableModel mostrar(String buscar) {  // Mostrar los registros de la tabla producto
+    public DefaultTableModel mostrar(String buscar) {  // Mostrar los registros de la tabla cliente
         DefaultTableModel modelo;
 
         //Guarda los títulos de la columna
@@ -94,47 +93,71 @@ public class fcliente {
         }
     }
 
-    public boolean editar(vproductos dts) {
-        sSQL = "update h_producto set nombre=?,descripcion=?,precio=?" //actualizar tabla producto
-                + "where idh_producto=?";
+    public boolean editar(vcliente dts) {
+        sSQL = "update h_persona set nombre=?,apellido=?,cui=?,direccion=?,celular=?" //actualizar tabla persona
+                + "where idh_persona=?";
+
+        sSQL2 = "update h_cliente set codigo_cliente=?" //actualizar tabla cliente
+                + "where idh_persona=?";
 
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
-            pst.setString(1, dts.getNombre()); //Enviar 1 a 1 todos los valores
-            pst.setString(2, dts.getDescripcion());
-            pst.setDouble(3, dts.getPrecio());
-            pst.setDouble(4, dts.getIdh_producto());
+            PreparedStatement pst2 = cn.prepareStatement(sSQL2);// prepara la cadena para poder insertar los registros
 
+            pst.setString(1, dts.getNombre()); //Enviar 1 a 1 todos los valores
+            pst.setString(2, dts.getApellido());
+            pst.setString(3, dts.getCui());
+            pst.setString(4, dts.getDireccion());
+            pst.setString(5, dts.getCelular());
+            pst.setInt(6, dts.getIdh_persona());
+            pst2.setString(1, dts.getCodigo_cliente());
+            pst2.setInt(2, dts.getIdh_persona());
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
 
             if (n != 0) { //condicion para ver si se ingresaron registros
-                return true;
+                int n2 = pst2.executeUpdate();
+                if (n2 != 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+
             } else {
                 return false;
             }
 
-        } catch (Exception e) { //si tiene error
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+        } catch (Exception e) {   // error si 
+            JOptionPane.showConfirmDialog(null, e);//Lanza el mensaje de error
             return false;
         }
     }
 
-    public boolean eliminar(vproductos dts) {
-        sSQL = "delete from h_producto where idh_producto=?";  // Borra los registros de los productos en el ID indicado
-
+    public boolean eliminar(vcliente dts) {
+        sSQL = "delete from h_cliente where idh_persona=?";  // Borra los registros del cliente en el ID indicado
+        sSQL2 = "delete from h_cliente where idh_persona=?";
         try {
-            PreparedStatement pst = cn.prepareStatement(sSQL); // prepara la cadena para poder insertar los registros
-            pst.setInt(1, dts.getIdh_producto());// El indice 1, es el ID producto para indicar que se elimina
-            int n = pst.executeUpdate(); //almacena el estado de la ejecucucion del Statement
+            PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
+            PreparedStatement pst2 = cn.prepareStatement(sSQL2);// prepara la cadena para poder insertar los registros
 
-            if (n != 0) {   //Revisa si esta vacio
-                return true;
+            //enviar todos los valores 1 a 1
+            pst.setInt(1, dts.getIdh_persona());
+            pst2.setInt(1, dts.getIdh_persona());
+            int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
+
+            if (n != 0) { //condicion para ver si se ingresaron registros
+                int n2 = pst2.executeUpdate();
+                if (n2 != 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+
             } else {
                 return false;
             }
 
-        } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+        } catch (Exception e) {   // error si 
+            JOptionPane.showConfirmDialog(null, e);//Lanza el mensaje de error
             return false;
         }
     }
