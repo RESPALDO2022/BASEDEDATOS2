@@ -1,6 +1,7 @@
 package logica;
 
-import Datos.vcliente;
+
+import Datos.vtrabajador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +9,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class fcliente {
+public class ftrabajador {
 
     private conexion mysql = new conexion(); //instancia para la conexion
     private Connection cn = mysql.conectar();// llama a la funcion conectar de la variable que instanciamos
@@ -16,18 +17,18 @@ public class fcliente {
     private String sSQL2 = "";//almacena la cadena de conexion
     public Integer totalregistros; // Total de registros tiene
 
-    public DefaultTableModel mostrar(String buscar) {  // Mostrar los registros de la tabla cliente
+    public DefaultTableModel mostrar(String buscar) {  // Mostrar los registros de la tabla trabajador
         DefaultTableModel modelo;
 
         //Guarda los títulos de la columna
-        String[] titulos = {"ID", "NOMBRE", "APELLIDO", "CUI", "DIRECCION", "CELULAR", "CODIGO CLIENTE"};
-        String[] registro = new String[7];  // almacena el registro de cada columna 
+        String[] titulos = {"ID", "NOMBRE", "APELLIDO", "CUI", "DIRECCION", "CELULAR", "SUELDO","USUARIO","CONTASENIA","CARGO","ESTADO"};
+        String[] registro = new String[11];  // almacena el registro de cada columna 
 
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);  // agregar titulos que ya se tienen 
 
-        sSQL = "select p.idh_persona,p.nombre,p.apellido,p.cui,p.direccion,p.celular,c.codigo_cliente from h_persona p inner join h_cliente c "
-                + "on p.idh_persona=c.idh_persona where cui like '%"
+        sSQL = "select p.idh_persona,p.nombre,p.apellido,p.cui,p.direccion,p.celular,t.sueldo,t.usuario,t.contrasenia,t.cargo,t.estado from h_persona p inner join h_trabajador t "
+                + "on p.idh_persona = t.idh_persona where cui like '%"
                 + buscar + "%' order by idh_persona desc "; //Consulta para obtener los registros de la tabla
 
         try { //declaracion de errores 
@@ -41,7 +42,11 @@ public class fcliente {
                 registro[3] = rs.getString("cui");
                 registro[4] = rs.getString("direccion");
                 registro[5] = rs.getString("celular");
-                registro[6] = rs.getString("codigo_cliente");
+                registro[6] = rs.getString("sueldo");
+                registro[7] = rs.getString("usuario");
+                registro[8] = rs.getString("contrasenia");
+                registro[9] = rs.getString("cargo");
+                registro[10] = rs.getString("estado");
 
                 totalregistros = totalregistros + 1; //Aumenta la variable en 1
                 modelo.addRow(registro);  //agrega a la variable modelo todos los registros
@@ -55,12 +60,12 @@ public class fcliente {
 
     }
 
-    public boolean insertar(vcliente dts) {   // Funcion insertar, recibe todo lo de la clase vcliente
+    public boolean insertar(vtrabajador dts) {   // Funcion insertar, recibe todo lo de la clase vtrabajador
         sSQL = "insert into h_persona(nombre,apellido,cui,direccion,celular)"
                 + "values (?,?,?,?,?)";
 
-        sSQL2 = "insert into h_cliente(idh_persona,codigo_cliente)"
-                + "values ((select idh_persona from h_persona order by idh_persona desc limit 1),?)";
+        sSQL2 = "insert into h_trabajador(idh_persona,sueldo,usuario,contrasenia,cargo,estado)"
+                + "values ((select idh_persona from h_persona order by idh_persona desc limit 1),?,?,?,?,?)";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);// prepara la cadena para poder insertar los registros
@@ -71,7 +76,11 @@ public class fcliente {
             pst.setString(4, dts.getDireccion());
             pst.setString(5, dts.getCelular());
 
-            pst2.setString(1, dts.getCodigo_cliente());
+            pst2.setDouble(1, dts.getSueldo());
+            pst2.setString(2, dts.getUsuario());
+            pst2.setString(3, dts.getContrasenia());
+            pst2.setString(4, dts.getCargo());
+            pst2.setString(5, dts.getEstado());
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
 
@@ -93,11 +102,11 @@ public class fcliente {
         }
     }
 
-    public boolean editar(vcliente dts) {
+    public boolean editar(vtrabajador dts) {
         sSQL = "update h_persona set nombre=?,apellido=?,cui=?,direccion=?,celular=?" //actualizar tabla persona
                 + "where idh_persona=?";
 
-        sSQL2 = "update h_cliente set codigo_cliente=?" //actualizar tabla cliente
+        sSQL2 = "update h_trabajador set sueldo=?,usuario=?,contrasenia=?,cargo=?,estado=?" //actualizar tabla trabajador
                 + "where idh_persona=?";
 
         try {
@@ -111,8 +120,13 @@ public class fcliente {
             pst.setString(5, dts.getCelular());
             pst.setInt(6, dts.getIdh_persona());
             
-            pst2.setString(1, dts.getCodigo_cliente());
-            pst2.setInt(2, dts.getIdh_persona());
+            pst2.setDouble(1, dts.getSueldo());
+            pst2.setString(2, dts.getUsuario());
+            pst2.setString(3, dts.getContrasenia());
+            pst2.setString(4, dts.getCargo());
+            pst2.setString(5, dts.getEstado());
+            
+            pst2.setInt(6, dts.getIdh_persona());
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
 
             if (n != 0) { //condicion para ver si se ingresaron registros
@@ -133,8 +147,8 @@ public class fcliente {
         }
     }
 
-    public boolean eliminar(vcliente dts) {
-        sSQL = "delete from h_cliente where idh_persona=?";  // Borra los registros del cliente en el ID indicado
+    public boolean eliminar(vtrabajador dts) {
+        sSQL = "delete from h_trabajador where idh_persona=?";  // Borra los registros del trabajador en el ID indicado
         sSQL2 = "delete from h_persona where idh_persona=?";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
