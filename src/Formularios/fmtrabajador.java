@@ -1,9 +1,9 @@
 package Formularios;
 
-import Datos.vcliente;
+import Datos.vtrabajador;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import logica.fcliente;
+import logica.ftrabajador;
 
 public class fmtrabajador extends javax.swing.JFrame {
 
@@ -30,6 +30,10 @@ public class fmtrabajador extends javax.swing.JFrame {
         txtdireccion.setEnabled(false);
         txtcelular.setEnabled(false);
         txtsueldo.setEnabled(false);
+        txtusuario.setEnabled(false);
+        txtcontrasenia.setEnabled(false);
+        cbocargo.setEnabled(false);
+        cboestado.setEnabled(false);
 
         btnguardar.setEnabled(false);
         btncancelar.setEnabled(false);
@@ -42,16 +46,23 @@ public class fmtrabajador extends javax.swing.JFrame {
         txtdireccion.setText("");
         txtcelular.setText("");
         txtsueldo.setText("");
+        txtusuario.setText("");
+        txtcontrasenia.setText("");
+
     }
 
     void habilitar() {// Habilita los botones para algunas operaciones
-        txtidpersona.setVisible(false);
+        txtidpersona.setVisible(true);
         txtnombre.setEnabled(true);
         txtapellido.setEnabled(true);
         txtcui.setEnabled(true);
         txtdireccion.setEnabled(true);
         txtcelular.setEnabled(true);
         txtsueldo.setEnabled(true);
+        txtusuario.setEnabled(true);
+        txtcontrasenia.setEnabled(true);
+        cbocargo.setEnabled(true);
+        cboestado.setEnabled(true);
 
         btnguardar.setEnabled(true);
         btncancelar.setEnabled(true);
@@ -64,17 +75,19 @@ public class fmtrabajador extends javax.swing.JFrame {
         txtdireccion.setText("");
         txtcelular.setText("");
         txtsueldo.setText("");
+        txtusuario.setText("");
+        txtcontrasenia.setText("");
     }
 
     void mostrar(String buscar) { // Realizar la busqueda
         try {
             DefaultTableModel modelo;
-            fcliente func = new fcliente(); //llama a la clase fcliente
-            modelo = func.mostrar(buscar);// Instancia la funcion mostrar de fcliente
+            ftrabajador func = new ftrabajador(); //llama a la clase ftrabajador
+            modelo = func.mostrar(buscar);// Instancia la funcion mostrar de ftrabajador
 
             tablalistado.setModel(modelo);//Asigna a la tabla los valores guardados en modelo
             ocultar_columnas(); //llama al metodo ocultar
-            lbltotalregistros.setText("Total Registros" + Integer.toString(func.totalregistros)); //Muestra en la etiqueta el total de clientes registrados
+            lbltotalregistros.setText("Total Registros" + Integer.toString(func.totalregistros)); //Muestra en la etiqueta el total de trabajadores registrados
 
         } catch (Exception e) {
             JOptionPane.showConfirmDialog(rootPane, e);
@@ -124,6 +137,7 @@ public class fmtrabajador extends javax.swing.JFrame {
         imagenfondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(940, 530));
 
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -330,7 +344,7 @@ public class fmtrabajador extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel15.setText("Estado:");
 
-        cboestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Activo", "Desactivo" }));
+        cboestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Act", "Des" }));
 
         txtusuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -345,12 +359,17 @@ public class fmtrabajador extends javax.swing.JFrame {
         });
 
         cbocargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Recepcionista" }));
+        cbocargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbocargoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -444,13 +463,13 @@ public class fmtrabajador extends javax.swing.JFrame {
                     .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
 
-        Fondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 390, 460));
+        Fondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 480));
 
         imagenfondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ttrabajador.jpeg"))); // NOI18N
-        Fondo.add(imagenfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 480));
+        Fondo.add(imagenfondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 530));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -481,7 +500,10 @@ public class fmtrabajador extends javax.swing.JFrame {
         txtdireccion.setText(tablalistado.getValueAt(fila, 4).toString());
         txtcelular.setText(tablalistado.getValueAt(fila, 5).toString());
         txtsueldo.setText(tablalistado.getValueAt(fila, 6).toString());
-
+        txtusuario.setText(tablalistado.getValueAt(fila, 7).toString());
+        txtcontrasenia.setText(tablalistado.getValueAt(fila, 8).toString());
+        cbocargo.setSelectedItem(tablalistado.getValueAt(fila, 9).toString());
+        cboestado.setSelectedItem(tablalistado.getValueAt(fila, 10).toString());
 
     }//GEN-LAST:event_tablalistadoMouseClicked
 
@@ -494,12 +516,12 @@ public class fmtrabajador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        if (!txtidpersona.getText().equals("")) {//Verifica que no este vacio lo del cliente que se va a eliminar
-            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar el cliente?", "Confirmar", 2);//Pregunta para confirmar la eliminacion
+        if (!txtidpersona.getText().equals("")) {//Verifica que no este vacio lo del trabajador que se va a eliminar
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar el trabajador?", "Confirmar", 2);//Pregunta para confirmar la eliminacion
 
             if (confirmacion == 0) {//Procede a la eliminacion
-                fcliente func = new fcliente();
-                vcliente dts = new vcliente();
+                ftrabajador func = new ftrabajador();
+                vtrabajador dts = new vtrabajador();
 
                 dts.setIdh_persona(Integer.parseInt(txtidpersona.getText()));
 
@@ -548,31 +570,43 @@ public class fmtrabajador extends javax.swing.JFrame {
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
         if (txtnombre.getText().length() == 0) { //Valida que nombre contenga datos
-            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un nombre del cliente");
+            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un nombre del trabajador");
             txtnombre.requestFocus();
             return;
         }
 
         if (txtapellido.getText().length() == 0) { //Valida que apellido contenga datos
-            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un apellido del cliente");
+            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un apellido del trabajador");
             txtapellido.requestFocus();
             return;
         }
 
         if (txtcui.getText().length() == 0) { //Valida que cui contenga datos
-            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar el CUI del cliente");
+            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar el CUI del trabajador");
             txtcui.requestFocus();
             return;
         }
 
         if (txtsueldo.getText().length() == 0) { //Valida que codigo contenga datos
-            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar el codigo del cliente");
+            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar el sueldo del trabajador");
             txtsueldo.requestFocus();
             return;
         }
 
-        vcliente dts = new vcliente();//Crea un nuevo objeto de la clase vcliente
-        fcliente func = new fcliente();//Llama a todas las funciones de fcliente
+        if (txtusuario.getText().length() == 0) { //Valida que cui contenga datos
+            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar el usuario del trabajador");
+            txtusuario.requestFocus();
+            return;
+        }
+
+        if (txtcontrasenia.getText().length() == 0) { //Valida que codigo contenga datos
+            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar la contrasenia del trabajador");
+            txtcontrasenia.requestFocus();
+            return;
+        }
+
+        vtrabajador dts = new vtrabajador();//Crea un nuevo objeto de la clase vtrabajador
+        ftrabajador func = new ftrabajador();//Llama a todas las funciones de ftrabajador
 
         //Se asigna los datos de las cajas de texto a las variables
         dts.setNombre(txtnombre.getText());
@@ -580,11 +614,18 @@ public class fmtrabajador extends javax.swing.JFrame {
         dts.setCui(txtcui.getText());
         dts.setDireccion(txtdireccion.getText());
         dts.setCelular(txtcelular.getText());
-        dts.setCodigo_cliente(txtsueldo.getText());
+        dts.setSueldo(Double.parseDouble(txtsueldo.getText())); //convierte el valor de la caja de texto a decimal
+        dts.setUsuario(txtusuario.getText());
+        dts.setContrasenia(txtcontrasenia.getText());
+
+        int seleccionado = cbocargo.getSelectedIndex();
+        dts.setCargo((String) cbocargo.getItemAt(seleccionado));
+        seleccionado = cboestado.getSelectedIndex();
+        dts.setEstado((String) cboestado.getItemAt(seleccionado));
 
         if (accion.equals("guardar")) {//Condicion para verificar si se va a guardar o modificar
             if (func.insertar(dts)) {//Verifica que los datos se esten insertando correctamente
-                JOptionPane.showMessageDialog(rootPane, "El cliente fue registrado satisfactoriamente");
+                JOptionPane.showMessageDialog(rootPane, "El trabajador fue registrado satisfactoriamente");
                 mostrar("");//Muestra todos los registros
                 inhabilitar();
             }
@@ -593,7 +634,7 @@ public class fmtrabajador extends javax.swing.JFrame {
             dts.setIdh_persona(Integer.parseInt(txtidpersona.getText()));//Convierte lo del getText a un Integer
 
             if (func.editar(dts)) {
-                JOptionPane.showMessageDialog(rootPane, "El cliente fue editado satisfactoriamente");
+                JOptionPane.showMessageDialog(rootPane, "El trabajador fue editado satisfactoriamente");
                 mostrar("");
                 inhabilitar();
             }
@@ -609,6 +650,10 @@ public class fmtrabajador extends javax.swing.JFrame {
     private void txtnombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreActionPerformed
         txtnombre.transferFocus();//Pasa automaticamente al siguiente campo
     }//GEN-LAST:event_txtnombreActionPerformed
+
+    private void cbocargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbocargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbocargoActionPerformed
 
     /**
      * @param args the command line arguments
