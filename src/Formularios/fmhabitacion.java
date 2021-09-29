@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import logica.fhabitacion;
 
 
-public class fmhabitacion extends javax.swing.JFrame {
+public class fmhabitacion extends javax.swing.JInternalFrame {
 
     public fmhabitacion() {
         initComponents();
@@ -113,7 +113,11 @@ public class fmhabitacion extends javax.swing.JFrame {
         btncancelar = new javax.swing.JButton();
         ImagenFondo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
 
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
