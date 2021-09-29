@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.ftrabajador;
 
-public class fmtrabajador extends javax.swing.JFrame {
+public class fmtrabajador extends javax.swing.JInternalFrame {
 
     public fmtrabajador() {
         initComponents();
@@ -136,8 +136,10 @@ public class fmtrabajador extends javax.swing.JFrame {
         cbocargo = new javax.swing.JComboBox<>();
         imagenfondo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(940, 530));
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
 
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

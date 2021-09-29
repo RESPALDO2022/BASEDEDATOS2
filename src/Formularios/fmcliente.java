@@ -5,13 +5,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.fcliente;
 
-public class fmcliente extends javax.swing.JFrame {
+public class fmcliente extends javax.swing.JInternalFrame {
 
     public fmcliente() {
         initComponents();
         mostrar("");
         inhabilitar();
-
     }
 
     private String accion = "guardar"; // determina si la accion es guardar o editar
@@ -115,8 +114,10 @@ public class fmcliente extends javax.swing.JFrame {
         txtcodigo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(940, 530));
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
 
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

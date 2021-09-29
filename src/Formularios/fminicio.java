@@ -13,7 +13,6 @@ public class fminicio extends javax.swing.JFrame {
         principal.setBorder(new ImagenFondo() );
     }
 
- 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -38,13 +37,15 @@ public class fminicio extends javax.swing.JFrame {
         principal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         principal.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Felix Titling", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 0));
         jLabel1.setText("SISTEMA HOTEL");
         principal.add(jLabel1);
-        jLabel1.setBounds(230, 30, 320, 60);
+        jLabel1.setBounds(180, 50, 390, 70);
 
         menuBar.setBackground(new java.awt.Color(255, 204, 204));
 
+        mnuinicio.setForeground(new java.awt.Color(51, 51, 0));
         mnuinicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inicio.jpeg"))); // NOI18N
         mnuinicio.setMnemonic('e');
         mnuinicio.setText("Inicio");
@@ -63,6 +64,11 @@ public class fminicio extends javax.swing.JFrame {
         copyMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/product.png"))); // NOI18N
         copyMenuItem.setMnemonic('y');
         copyMenuItem.setText("Productos");
+        copyMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyMenuItemActionPerformed(evt);
+            }
+        });
         mnuinicio.add(copyMenuItem);
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reservas.png"))); // NOI18N
@@ -76,6 +82,11 @@ public class fminicio extends javax.swing.JFrame {
 
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/clientesa.png"))); // NOI18N
         jMenuItem2.setText("Clientes");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         mnuinicio.add(jMenuItem2);
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pagos.png"))); // NOI18N
@@ -84,11 +95,13 @@ public class fminicio extends javax.swing.JFrame {
 
         menuBar.add(mnuinicio);
 
+        mnuconsultas.setForeground(new java.awt.Color(51, 51, 0));
         mnuconsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/consultas.jpeg"))); // NOI18N
         mnuconsultas.setText("Reportes");
         mnuconsultas.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         menuBar.add(mnuconsultas);
 
+        mnuconfiguraciones.setForeground(new java.awt.Color(51, 51, 0));
         mnuconfiguraciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/configuracion.jpeg"))); // NOI18N
         mnuconfiguraciones.setText("Configuraciones");
         mnuconfiguraciones.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
@@ -104,9 +117,15 @@ public class fminicio extends javax.swing.JFrame {
 
         menuBar.add(mnuconfiguraciones);
 
+        mnusalir.setForeground(new java.awt.Color(51, 51, 0));
         mnusalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salir.jpeg"))); // NOI18N
         mnusalir.setText("Salir");
         mnusalir.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        mnusalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnusalirMouseClicked(evt);
+            }
+        });
         menuBar.add(mnusalir);
 
         setJMenuBar(menuBar);
@@ -130,7 +149,10 @@ public class fminicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+        fmtrabajador form = new fmtrabajador();
+        principal.add(form);
+        form.toFront();
+        form.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void cutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutMenuItemActionPerformed
@@ -139,6 +161,24 @@ public class fminicio extends javax.swing.JFrame {
         form.toFront();
         form.setVisible(true);
     }//GEN-LAST:event_cutMenuItemActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        fmcliente form = new fmcliente();
+        principal.add(form);
+        form.toFront();
+        form.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void copyMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyMenuItemActionPerformed
+        fmproducto form = new fmproducto();
+        principal.add(form);
+        form.toFront();
+        form.setVisible(true);
+    }//GEN-LAST:event_copyMenuItemActionPerformed
+
+    private void mnusalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnusalirMouseClicked
+       this.dispose();
+    }//GEN-LAST:event_mnusalirMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

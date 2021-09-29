@@ -117,7 +117,6 @@ public class fmhabitacion extends javax.swing.JInternalFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconifiable(true);
         setMaximizable(true);
-        setResizable(true);
 
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

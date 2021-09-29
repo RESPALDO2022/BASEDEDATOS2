@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.fproducto;
 
-public class fmproducto extends javax.swing.JFrame {
+public class fmproducto extends javax.swing.JInternalFrame {
 
     public fmproducto() {
         initComponents();
@@ -102,7 +102,10 @@ public class fmproducto extends javax.swing.JFrame {
         btncancelar = new javax.swing.JButton();
         ImagenFondo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconifiable(true);
+        setMaximizable(true);
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
