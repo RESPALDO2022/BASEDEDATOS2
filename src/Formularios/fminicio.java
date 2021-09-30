@@ -1,8 +1,6 @@
-
 package Formularios;
 
 import Fondo.ImagenFondo;
-
 
 public class fminicio extends javax.swing.JFrame {
 
@@ -19,6 +17,10 @@ public class fminicio extends javax.swing.JFrame {
 
         principal = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
+        lblidpersona = new javax.swing.JLabel();
+        lblnombre = new javax.swing.JLabel();
+        lblapellido = new javax.swing.JLabel();
+        lblacceso = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         mnuinicio = new javax.swing.JMenu();
         cutMenuItem = new javax.swing.JMenuItem();
@@ -42,6 +44,26 @@ public class fminicio extends javax.swing.JFrame {
         jLabel1.setText("SISTEMA HOTEL");
         principal.add(jLabel1);
         jLabel1.setBounds(180, 50, 390, 70);
+
+        lblidpersona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblidpersona.setText("jLabel2");
+        principal.add(lblidpersona);
+        lblidpersona.setBounds(250, 150, 250, 30);
+
+        lblnombre.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblnombre.setText("jLabel2");
+        principal.add(lblnombre);
+        lblnombre.setBounds(250, 200, 250, 30);
+
+        lblapellido.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblapellido.setText("jLabel2");
+        principal.add(lblapellido);
+        lblapellido.setBounds(250, 250, 250, 30);
+
+        lblacceso.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblacceso.setText("jLabel2");
+        principal.add(lblacceso);
+        lblacceso.setBounds(250, 300, 250, 30);
 
         menuBar.setBackground(new java.awt.Color(255, 204, 204));
 
@@ -220,9 +242,13 @@ public class fminicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    public static javax.swing.JLabel lblacceso;
+    public static javax.swing.JLabel lblapellido;
+    public static javax.swing.JLabel lblidpersona;
+    public static javax.swing.JLabel lblnombre;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenu mnuconfiguraciones;
-    private javax.swing.JMenu mnuconsultas;
+    public static javax.swing.JMenu mnuconfiguraciones;
+    public static javax.swing.JMenu mnuconsultas;
     private javax.swing.JMenu mnuinicio;
     private javax.swing.JMenu mnusalir;
     private javax.swing.JDesktopPane principal;
