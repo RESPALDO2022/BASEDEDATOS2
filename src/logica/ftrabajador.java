@@ -176,5 +176,43 @@ public class ftrabajador {
             return false;
         }
     }
+    public DefaultTableModel login(String login, String password) {  // funcion que envia el usuario y contrasenia
+        DefaultTableModel modelo;
+
+        //Guarda los títulos de la columna
+        String[] titulos = {"ID", "NOMBRE", "APELLIDO","USUARIO","CONTASENIA","CARGO","ESTADO"};
+        String[] registro = new String[7];  // almacena el registro de cada columna 
+
+        totalregistros = 0;
+        modelo = new DefaultTableModel(null, titulos);  // agregar titulos que ya se tienen 
+
+        sSQL = "select p.idh_persona,p.nombre,p.apellido,t.usuario,t.contrasenia,t.cargo,t.estado from h_persona p inner join h_trabajador t "
+                + "on p.idh_persona = t.idh_persona where t.login='"
+                + login + "' and t.password='"+ password +"'and t.estado= 'ACT' "; //Consulta verifica que exista el usuario y contrasenia y que este activada
+
+        try { //declaracion de errores 
+            Statement st = cn.createStatement();   // asigna a la variable de tipo Statement la conexion de La BD
+            ResultSet rs = st.executeQuery(sSQL); //ejecuta la consulta de arriba  
+
+            while (rs.next()) { //todos los registros obtenidos
+                registro[0] = rs.getString("idh_persona");
+                registro[1] = rs.getString("nombre");
+                registro[2] = rs.getString("apellido");
+                registro[3] = rs.getString("usuario");
+                registro[4] = rs.getString("contrasenia");
+                registro[5] = rs.getString("cargo");
+                registro[6] = rs.getString("estado");
+
+                totalregistros = totalregistros + 1; //Aumenta la variable en 1
+                modelo.addRow(registro);  //agrega a la variable modelo todos los registros
+            }
+            return modelo;   // retorna los valores del modelo si no hay ningun error
+
+        } catch (Exception e) {    // Si hay un error muestra una advertencia 
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }
+
+    }
 
 }
