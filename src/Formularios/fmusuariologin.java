@@ -60,6 +60,11 @@ public class fmusuariologin extends javax.swing.JFrame {
 
         btnsalir.setBackground(new java.awt.Color(235, 191, 145));
         btnsalir.setText("SALIR");
+        btnsalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnsalirMouseClicked(evt);
+            }
+        });
         jPanel1.add(btnsalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 73, -1));
 
         tablalistado.setModel(new javax.swing.table.DefaultTableModel(
@@ -134,6 +139,10 @@ public class fmusuariologin extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btningresarActionPerformed
+
+    private void btnsalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsalirMouseClicked
+       this.dispose();
+    }//GEN-LAST:event_btnsalirMouseClicked
 
     /**
      * @param args the command line arguments
