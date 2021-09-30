@@ -187,8 +187,8 @@ public class ftrabajador {
         modelo = new DefaultTableModel(null, titulos);  // agregar titulos que ya se tienen 
 
         sSQL = "select p.idh_persona,p.nombre,p.apellido,t.usuario,t.contrasenia,t.cargo,t.estado from h_persona p inner join h_trabajador t "
-                + "on p.idh_persona = t.idh_persona where t.login='"
-                + login + "' and t.password='"+ password +"'and t.estado= 'ACT' "; //Consulta verifica que exista el usuario y contrasenia y que este activada
+                + "on p.idh_persona = t.idh_persona where t.usuario='"
+                + login + "' and t.contrasenia='"+ password +"'and t.estado= 'ACT' "; //Consulta verifica que exista el usuario y contrasenia y que este activada
 
         try { //declaracion de errores 
             Statement st = cn.createStatement();   // asigna a la variable de tipo Statement la conexion de La BD

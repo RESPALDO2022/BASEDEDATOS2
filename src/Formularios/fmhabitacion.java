@@ -11,8 +11,8 @@ import logica.fhabitacion;
 public class fmhabitacion extends javax.swing.JInternalFrame {
 
     public fmhabitacion() {
-        initComponents();
         
+        initComponents();
         mostrar("");
         inhabilitar();
     }
@@ -615,4 +615,8 @@ public class fmhabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtnumero;
     private javax.swing.JTextField txtprecio;
     // End of variables declaration//GEN-END:variables
+
+    private void setLocationRelativeTo(Object object) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
