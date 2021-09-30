@@ -119,7 +119,7 @@ public class fmusuariologin extends javax.swing.JFrame {
                 fminicio.lblidpersona.setText(tablalistado.getValueAt(0, 0).toString());
                 fminicio.lblnombre.setText(tablalistado.getValueAt(0, 1).toString());
                 fminicio.lblapellido.setText(tablalistado.getValueAt(0, 2).toString());
-                fminicio.lblacceso.setText(tablalistado.getValueAt(0, 3).toString());
+                fminicio.lblacceso.setText(tablalistado.getValueAt(0, 5).toString());
 
                 if (!fminicio.lblacceso.getText().equals("Administrador")) {
                     fminicio.mnuconsultas.setEnabled(false);
