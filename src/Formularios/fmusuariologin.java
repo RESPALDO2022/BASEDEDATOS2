@@ -9,8 +9,8 @@ public class fmusuariologin extends javax.swing.JFrame {
 
     public fmusuariologin() {
         initComponents();
-        this.setTitle("Acceso al Sistema Hotel");
-        this.setLocationRelativeTo(null);
+        this.setTitle("Acceso al Sistema Hotel");//nombre de la ventna
+        this.setLocationRelativeTo(null);//aparezca en el centro 
     }
 
     @SuppressWarnings("unchecked")
@@ -80,7 +80,7 @@ public class fmusuariologin extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablalistado);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 40, 23));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 40, 20));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondologin.jpeg"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, 210));
@@ -106,32 +106,33 @@ public class fmusuariologin extends javax.swing.JFrame {
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
 
         try {
-            DefaultTableModel modelo;
-            ftrabajador func = new ftrabajador();
-            vtrabajador dts = new vtrabajador();
+            DefaultTableModel modelo; //declaracion de varible tipo default
+            ftrabajador func = new ftrabajador(); //Llamamos a la clase ftrabajador 
+            vtrabajador dts = new vtrabajador(); // clase que contiene todos los metodos setters y getters
 
-            dts.setUsuario(txtusuario.getText());
-            dts.setContrasenia(txtpassword.getText());
+            dts.setUsuario(txtusuario.getText());  // obtiene el usuario del formulario de login
+            dts.setContrasenia(txtpassword.getText()); //obtiene la contraseña del formulario de login
 
-            modelo = func.login(dts.getUsuario(), dts.getContrasenia());
+            modelo = func.login(dts.getUsuario(), dts.getContrasenia()); // se envian las variables a la funcion
 
-            tablalistado.setModel(modelo);
-            if (func.totalregistros > 0) {
-                this.dispose();
-                fminicio form = new fminicio();
+            tablalistado.setModel(modelo);  //enviamos los datos a la tabla listado 
+            
+            if (func.totalregistros > 0) {// si es mayor a 0 quiere decir que el usuario si existe
+                this.dispose();// cierra el formulario de login
+                fminicio form = new fminicio(); //llama al formulario de inicio
                 form.toFront();
-                form.setVisible(true);
-                fminicio.lblidpersona.setText(tablalistado.getValueAt(0, 0).toString());
+                form.setVisible(true);// lo hace visible
+                fminicio.lblidpersona.setText(tablalistado.getValueAt(0, 0).toString()); //envia el valor de la posicion 0,0 de la tabla (ID)a la etiqueta que aparece en el formulario inicio
                 fminicio.lblnombre.setText(tablalistado.getValueAt(0, 1).toString());
                 fminicio.lblapellido.setText(tablalistado.getValueAt(0, 2).toString());
                 fminicio.lblacceso.setText(tablalistado.getValueAt(0, 5).toString());
 
-                if (!fminicio.lblacceso.getText().equals("Administrador")) {
-                    fminicio.mnuconsultas.setEnabled(false);
-                    fminicio.mnuconfiguraciones.setEnabled(false);
+                if (!fminicio.lblacceso.getText().equals("Administrador")) { // si el cargo es diferente al Administrador
+                    fminicio.mnuconsultas.setEnabled(false);// oculta la opcion de consultas
+                    fminicio.mnuconfiguraciones.setEnabled(false);// oculta la configuracion de los trabajadores
                 }
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Acceso denegado","Acceso al Sistema Hotel",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(rootPane, "Acceso denegado","Acceso al Sistema Hotel",JOptionPane.ERROR_MESSAGE);// mensaje de error 
             }
 
         } catch (Exception e) {

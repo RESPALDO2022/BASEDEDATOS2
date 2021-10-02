@@ -67,8 +67,8 @@ public class ftrabajador {
         sSQL2 = "insert into h_trabajador(idh_persona,sueldo,usuario,contrasenia,cargo,estado)"
                 + "values ((select idh_persona from h_persona order by idh_persona desc limit 1),?,?,?,?,?)";
         try {
-            PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
-            PreparedStatement pst2 = cn.prepareStatement(sSQL2);// prepara la cadena para poder insertar los registros
+            PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros de la clase persona
+            PreparedStatement pst2 = cn.prepareStatement(sSQL2);// prepara la cadena para poder insertar los registros de la clase trabajador
 
             pst.setString(1, dts.getNombre()); //Enviar 1 a 1 todos los valores
             pst.setString(2, dts.getApellido());
@@ -203,7 +203,7 @@ public class ftrabajador {
                 registro[5] = rs.getString("cargo");
                 registro[6] = rs.getString("estado");
 
-                totalregistros = totalregistros + 1; //Aumenta la variable en 1
+                totalregistros = totalregistros + 1; //Aumenta la variable en 1 para que pued tener accceso al formulario
                 modelo.addRow(registro);  //agrega a la variable modelo todos los registros
             }
             return modelo;   // retorna los valores del modelo si no hay ningun error
