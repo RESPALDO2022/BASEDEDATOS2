@@ -229,6 +229,12 @@ public class fmcliente extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(249, 246, 232));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        txtidpersona.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidpersonaActionPerformed(evt);
+            }
+        });
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Nombre:");
 
@@ -540,6 +546,10 @@ public class fmcliente extends javax.swing.JInternalFrame {
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btncancelarActionPerformed
+
+    private void txtidpersonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidpersonaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtidpersonaActionPerformed
 
     /**
      * @param args the command line arguments
