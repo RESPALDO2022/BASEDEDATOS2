@@ -44,14 +44,15 @@ public class freserva {
                 registro[0] = rs.getString("idh_reserva");
                 registro[1] = rs.getString("idh_habitacion");
                 registro[2] = rs.getString("numero");
-                registro[3] = rs.getString("clienten") + " " + rs.getString("clienteap");
-                registro[4] = rs.getString("idh_trabajador");
-                registro[5] = rs.getString("trabjadorn") + " " + rs.getString("trabajadorap");
-                registro[6] = rs.getString("fecha_reservacion");
-                registro[7] = rs.getString("fecha_ingreso");
-                registro[8] = rs.getString("fecha_salida");
-                registro[9] = rs.getString("costo_alojamiento");
-                registro[10] = rs.getString("estado_reserva");
+                registro[3] = rs.getString("idh_cliente");
+                registro[4] = rs.getString("clienten") + " " + rs.getString("clienteap");
+                registro[5] = rs.getString("idh_trabajador");
+                registro[6] = rs.getString("trabjadorn") + " " + rs.getString("trabajadorap");
+                registro[7] = rs.getString("fecha_reservacion");
+                registro[8] = rs.getString("fecha_ingreso");
+                registro[9] = rs.getString("fecha_salida");
+                registro[10] = rs.getString("costo_alojamiento");
+                registro[11] = rs.getString("estado_reserva");
 
                 totalregistros = totalregistros + 1; //Aumenta la variable en 1
                 modelo.addRow(registro);  //agrega a la variable modelo todos los registros

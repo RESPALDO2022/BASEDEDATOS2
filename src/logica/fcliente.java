@@ -27,7 +27,7 @@ public class fcliente {
         modelo = new DefaultTableModel(null, titulos);  // agregar titulos que ya se tienen 
 
         sSQL = "select p.idh_persona,p.nombre,p.apellido,p.cui,p.direccion,p.celular,c.codigo_cliente from h_persona p inner join h_cliente c "
-                + "on p.idh_persona=c.idh_persona where cui like '%"
+                + "on p.idh_persona=c.idh_persona where nombre like '%"
                 + buscar + "%' order by idh_persona desc "; //Consulta para obtener los registros de la tabla
 
         try { //declaracion de errores 
