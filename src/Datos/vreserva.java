@@ -11,7 +11,7 @@ public class vreserva {
     private Date fecha_reservacion;
     private Date fecha_ingreso;
     private Date fecha_salida;
-    private double costo_alojamiento;
+    private Double costo_alojamiento;
     private String estado_reserva;
 
     public vreserva() {

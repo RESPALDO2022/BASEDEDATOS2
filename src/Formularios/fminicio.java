@@ -45,25 +45,21 @@ public class fminicio extends javax.swing.JFrame {
         principal.add(jLabel1);
         jLabel1.setBounds(180, 50, 390, 70);
 
-        lblidpersona.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblidpersona.setText("jLabel2");
+        lblidpersona.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         principal.add(lblidpersona);
-        lblidpersona.setBounds(250, 150, 250, 30);
+        lblidpersona.setBounds(310, 150, 250, 30);
 
-        lblnombre.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblnombre.setText("jLabel2");
+        lblnombre.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         principal.add(lblnombre);
-        lblnombre.setBounds(250, 200, 250, 30);
+        lblnombre.setBounds(310, 200, 250, 30);
 
-        lblapellido.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblapellido.setText("jLabel2");
+        lblapellido.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         principal.add(lblapellido);
-        lblapellido.setBounds(250, 250, 250, 30);
+        lblapellido.setBounds(310, 250, 250, 30);
 
-        lblacceso.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblacceso.setText("jLabel2");
+        lblacceso.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
         principal.add(lblacceso);
-        lblacceso.setBounds(250, 300, 250, 30);
+        lblacceso.setBounds(310, 300, 250, 30);
 
         menuBar.setBackground(new java.awt.Color(255, 204, 204));
 

@@ -28,13 +28,13 @@ public class freserva {
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);  // agregar titulos que ya se tienen 
 
-        sSQL = "select r.idh_reserva, r.idh_habitacion, h.numero, r.idh_cliente,"
-                + "(select nombre from h_persona where idh_persona=r.idh_cliente) as clienten,"
-                + "(select apellido from h_persona where idh_persona=r.idh_cliente) as clienteap,"
-                + "r.idh_trabajador,(select nombre from h_persona where idh_persona=r.idh_trabajador)as trabajadorn,"
-                + "(select apellido from h_persona where idh_persona=r.idh_trabajador)as trabajadorap,"
-                + "r.fecha_reservacion, r.fecha_ingreso, r.fecha_salida,"
-                + "r.costo_alojamiento, r.estado_reserva from h_reserva r inner join h_habitacion h on r.idh_habitacion=h.idh_habitacion where r.fecha_reservacion like '%" + buscar + "%' order by idh_reserva desc "; //Consulta para obtener los registros de la tabla
+        sSQL = "select r.idh_reserva, r.idh_habitacion, h.numero, r.idh_cliente,"+
+                "(select nombre from h_persona where idh_persona=r.idh_cliente) as clienten,"+
+                "(select apellido from h_persona where idh_persona=r.idh_cliente) as clienteap,"+
+                "r.idh_trabajador,(select nombre from h_persona where idh_persona=r.idh_trabajador)as trabajadorn,"+
+                "(select apellido from h_persona where idh_persona=r.idh_trabajador)as trabajadorap,"+
+                "r.fecha_reservacion, r.fecha_ingreso, r.fecha_salida,"+
+                "r.costo_alojamiento, r.estado_reserva from h_reserva r inner join h_habitacion h on r.idh_habitacion=h.idh_habitacion where r.fecha_reservacion like '%" + buscar + "%' order by idh_reserva desc "; //Consulta para obtener los registros de la tabla
        
         try { //declaracion de errores 
             Statement st = cn.createStatement();   // asigna a la variable de tipo Statement la conexion de La BD
@@ -47,7 +47,7 @@ public class freserva {
                 registro[3] = rs.getString("idh_cliente");
                 registro[4] = rs.getString("clienten") + " " + rs.getString("clienteap");
                 registro[5] = rs.getString("idh_trabajador");
-                registro[6] = rs.getString("trabjadorn") + " " + rs.getString("trabajadorap");
+                registro[6] = rs.getString("trabajadorn") + " " + rs.getString("trabajadorap");
                 registro[7] = rs.getString("fecha_reservacion");
                 registro[8] = rs.getString("fecha_ingreso");
                 registro[9] = rs.getString("fecha_salida");
@@ -74,9 +74,9 @@ public class freserva {
             pst.setInt(1, dts.getIdh_habitacion()); //Enviar 1 a 1 todos los valores
             pst.setInt(2, dts.getIdh_cliente());
             pst.setInt(3, dts.getIdh_trabajador());
-            pst.setDate(4, (Date) dts.getFecha_reservacion());
-            pst.setDate(5, (Date) dts.getFecha_ingreso());
-            pst.setDate(6, (Date) dts.getFecha_salida());
+            pst.setDate(4,dts.getFecha_reservacion());
+            pst.setDate(5,dts.getFecha_ingreso());
+            pst.setDate(6,dts.getFecha_salida());
             pst.setDouble(7, dts.getCosto_alojamiento());
             pst.setString(8, dts.getEstado_reserva());
 
@@ -102,9 +102,9 @@ public class freserva {
             pst.setInt(1, dts.getIdh_habitacion()); //Enviar 1 a 1 todos los valores
             pst.setInt(2, dts.getIdh_cliente());
             pst.setInt(3, dts.getIdh_trabajador());
-            pst.setDate(4, (Date) dts.getFecha_reservacion());
-            pst.setDate(5, (Date) dts.getFecha_ingreso());
-            pst.setDate(6, (Date) dts.getFecha_salida());
+            pst.setDate(4,dts.getFecha_reservacion());
+            pst.setDate(5,dts.getFecha_ingreso());
+            pst.setDate(6,dts.getFecha_salida());
             pst.setDouble(7, dts.getCosto_alojamiento());
             pst.setString(8, dts.getEstado_reserva());
             pst.setInt(9, dts.getIdh_reserva());    
