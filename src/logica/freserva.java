@@ -1,6 +1,6 @@
 package logica;
 
-import Datos.vproductos;
+
 import Datos.vreserva;
 import java.sql.ResultSet;
 import java.sql.Connection;
@@ -92,17 +92,22 @@ public class freserva {
         }
     }
 
-    public boolean editar(vproductos dts) {
-        sSQL = "update h_producto set nombre=?,descripcion=?,precio=?" //actualizar tabla reserva
-                + "where idh_producto=?";
-
+    public boolean editar(vreserva dts) {
+        sSQL = "update h_reserva set idh_habitacion=?,idh_cliente=?,idh_trabajador=?,fecha_reservacion=?,fecha_ingreso=?,fecha_salida=?,costo_alojamiento=?,estado_reserva=?" //actualizar tabla reserva
+                + "where idh_reserva=?";
+             
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
-            pst.setString(1, dts.getNombre()); //Enviar 1 a 1 todos los valores
-            pst.setString(2, dts.getDescripcion());
-            pst.setDouble(3, dts.getPrecio());
-            pst.setDouble(4, dts.getIdh_producto());
-
+            pst.setInt(1, dts.getIdh_habitacion()); //Enviar 1 a 1 todos los valores
+            pst.setInt(2, dts.getIdh_cliente());
+            pst.setInt(3, dts.getIdh_trabajador());
+            pst.setDate(4, (Date) dts.getFecha_reservacion());
+            pst.setDate(5, (Date) dts.getFecha_ingreso());
+            pst.setDouble(7, dts.getCosto_alojamiento());
+            pst.setString(8, dts.getEstado_reserva());
+            pst.setInt(9, dts.getIdh_reserva());    
+            
+           
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
 
             if (n != 0) { //condicion para ver si se ingresaron registros
@@ -117,12 +122,12 @@ public class freserva {
         }
     }
 
-    public boolean eliminar(vproductos dts) {
-        sSQL = "delete from h_producto where idh_producto=?";  // Borra los registros de las reservas en el ID indicado
+    public boolean eliminar(vreserva dts) {
+        sSQL = "delete from h_reserva where idh_reserva=?";  // Borra los registros de las reservas en el ID indicado
 
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL); // prepara la cadena para poder insertar los registros
-            pst.setInt(1, dts.getIdh_producto());// El indice 1, es el ID reserva para indicar que se elimina
+            pst.setInt(1, dts.getIdh_reserva());// El indice 1, es el ID reserva para indicar que se elimina
             int n = pst.executeUpdate(); //almacena el estado de la ejecucucion del Statement
 
             if (n != 0) {   //Revisa si esta vacio
