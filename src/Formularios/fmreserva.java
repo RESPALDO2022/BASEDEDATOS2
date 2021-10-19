@@ -1,112 +1,115 @@
-
 package Formularios;
 
+import java.sql.Date;
+import Datos.vreserva;
+import static java.lang.String.valueOf;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import logica.freserva;
 
 public class fmreserva extends javax.swing.JFrame {
 
-   
     public fmreserva() {
         initComponents();
         mostrar("");
         inhabilitar();
-        
+
     }
 
-     private String accion="guardar"; // determina si la accion es guardar o editar
-    
-    void ocultar_columnas(){ //Oculta las columnas que estan de mas en la tabla
-    tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
-    tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
-    tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
-    
-    tablalistado.getColumnModel().getColumn(1).setMaxWidth(0);
-    tablalistado.getColumnModel().getColumn(1).setMinWidth(0);
-    tablalistado.getColumnModel().getColumn(1).setPreferredWidth(0);
-    
-    tablalistado.getColumnModel().getColumn(3).setMaxWidth(0);
-    tablalistado.getColumnModel().getColumn(3).setMinWidth(0);
-    tablalistado.getColumnModel().getColumn(3).setPreferredWidth(0);
-    
-    tablalistado.getColumnModel().getColumn(5).setMaxWidth(0);
-    tablalistado.getColumnModel().getColumn(5).setMinWidth(0);
-    tablalistado.getColumnModel().getColumn(5).setPreferredWidth(0);
+    private String accion = "guardar"; // determina si la accion es guardar o editar
+    public static int idusuario; //para trabajar con el usuarioque ha iniciado sesion en el sistema
+
+    void ocultar_columnas() { //Oculta las columnas que estan de mas en la tabla
+        tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+        tablalistado.getColumnModel().getColumn(1).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(1).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(1).setPreferredWidth(0);
+
+        tablalistado.getColumnModel().getColumn(3).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(3).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(3).setPreferredWidth(0);
+
+        tablalistado.getColumnModel().getColumn(5).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(5).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(5).setPreferredWidth(0);
     }
-    
-    void inhabilitar (){ // Desabilita los botones para algunas operaciones
-    txtidreserva.setVisible(false);   
-    txtidhabitacion.setEnabled(false);
-    txtidcliente.setEnabled(false);
-    txtidtrabajador.setEnabled(false);
-    txtnumero.setEnabled(false);
-    txtcliente.setEnabled(false);
-    txttrabajador.setEnabled(false);
-    dcfecha_reserva.setEnabled(false);
-    dcfecha_ingresa1.setEnabled(false);
-    dcfecha_salida.setEnabled(false);   
-    txtcosto_alojamiento.setEnabled(false);
-    cboestado.setEnabled(false);
-    
-    btnguardar.setEnabled(false);
-    btncancelar.setEnabled(false);
-    btneliminar.setEnabled(false);
-    btnbuscacliente.setEnabled(false);
-    btnbuscahabitacion.setEnabled(false);
-    
-    
-    txtidreserva.setText("");
-    txtidcliente.setText("");
-    txtnumero.setText("");
-    txtcliente.setText("");
-    txtcosto_alojamiento.setText("");  
-    txtidhabitacion.setText("");
-   
+
+    void inhabilitar() { // Desabilita los botones para algunas operaciones
+        txtidreserva.setVisible(false);
+        txtidhabitacion.setEnabled(false);
+        txtidcliente.setEnabled(false);
+        txtidtrabajador.setEnabled(false);
+        txtnumero.setEnabled(false);
+        txtcliente.setEnabled(false);
+        txttrabajador.setEnabled(false);
+        dcfecha_reserva.setEnabled(false);
+        dcfecha_ingresa1.setEnabled(false);
+        dcfecha_salida.setEnabled(false);
+        txtcosto_alojamiento.setEnabled(false);
+        cboestado.setEnabled(false);
+
+        btnguardar.setEnabled(false);
+        btncancelar.setEnabled(false);
+        btneliminar.setEnabled(false);
+        btnbuscacliente.setEnabled(false);
+        btnbuscahabitacion.setEnabled(false);
+
+        txtidreserva.setText("");
+        txtidcliente.setText("");
+        txtnumero.setText("");
+        txtcliente.setText("");
+        txtcosto_alojamiento.setText("");
+        txtidhabitacion.setText("");
+
     }
-    
-    void habilitar (){// Habilita los botones para algunas operaciones
-    txtidreserva.setVisible(false);   
-    txtidhabitacion.setEnabled(false);
-    txtidcliente.setEnabled(false);
-    txtidtrabajador.setEnabled(false);
-    txtnumero.setEnabled(false);
-    txtcliente.setEnabled(false);
-    txttrabajador.setEnabled(false);
-    dcfecha_reserva.setEnabled(true);
-    dcfecha_ingresa1.setEnabled(true);
-    dcfecha_salida.setEnabled(true);   
-    txtcosto_alojamiento.setEnabled(true);
-    cboestado.setEnabled(true);
-    
-    btnguardar.setEnabled(true);
-    btncancelar.setEnabled(true);
-    btneliminar.setEnabled(true);
-    btnbuscacliente.setEnabled(true);
-    btnbuscahabitacion.setEnabled(true);
-    
-    
-    txtidreserva.setText("");
-    txtidcliente.setText("");
-    txtnumero.setText("");
-    txtcliente.setText("");
-    txtcosto_alojamiento.setText("");  
-    txtidhabitacion.setText("");
+
+    void habilitar() {// Habilita los botones para algunas operaciones
+        txtidreserva.setVisible(false);
+        txtidhabitacion.setEnabled(false);
+        txtidcliente.setEnabled(false);
+        txtidtrabajador.setEnabled(false);
+        txtnumero.setEnabled(false);
+        txtcliente.setEnabled(false);
+        txttrabajador.setEnabled(false);
+        dcfecha_reserva.setEnabled(true);
+        dcfecha_ingresa1.setEnabled(true);
+        dcfecha_salida.setEnabled(true);
+        txtcosto_alojamiento.setEnabled(true);
+        cboestado.setEnabled(true);
+
+        btnguardar.setEnabled(true);
+        btncancelar.setEnabled(true);
+        btneliminar.setEnabled(true);
+        btnbuscacliente.setEnabled(true);
+        btnbuscahabitacion.setEnabled(true);
+
+        txtidreserva.setText("");
+        txtidcliente.setText("");
+        txtnumero.setText("");
+        txtcliente.setText("");
+        txtcosto_alojamiento.setText("");
+        txtidhabitacion.setText("");
     }
-    
-    void mostrar(String buscar){ // Realizar la busqueda
-    try{
-        DefaultTableModel modelo; 
-//        fproducto func=new fproducto(); //llama a la clase fproducto
-//        modelo=func.mostrar(buscar);// Instancia la funcion mostrar de fproducto
-        
-//        tablalistado.setModel(modelo);//Asigna a la tabla los valores guardados en modelo
-        ocultar_columnas(); //llama al metodo ocultar
-//        lbltotalregistros.setText("Total Registros"+Integer.toString(func.totalregistros)); //Muestra en la etiqueta el total de productos registrados
-              
-    }catch(Exception e){
-        JOptionPane.showConfirmDialog(rootPane,e);
+
+    void mostrar(String buscar) { // Realizar la busqueda
+        try {
+            DefaultTableModel modelo;
+            freserva func = new freserva(); //llama a la clase freserva
+            modelo = func.mostrar(buscar);// Instancia la funcion mostrar de freserva
+
+            tablalistado.setModel(modelo);//Asigna a la tabla los valores guardados en modelo
+            ocultar_columnas(); //llama al metodo ocultar
+            lbltotalregistros.setText("Total Registros" + Integer.toString(func.totalregistros)); //Muestra en la etiqueta el total de reservas registrados
+
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
+        }
     }
-    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -496,7 +499,17 @@ public class fmreserva extends javax.swing.JFrame {
 
         txtidreserva.setText(tablalistado.getValueAt(fila, 0).toString());
         txtidhabitacion.setText(tablalistado.getValueAt(fila, 1).toString());
-       
+        txtnumero.setText(tablalistado.getValueAt(fila, 2).toString());
+        txtidcliente.setText(tablalistado.getValueAt(fila, 3).toString());
+        txtcliente.setText(tablalistado.getValueAt(fila, 4).toString());
+        txtidtrabajador.setText(tablalistado.getValueAt(fila, 5).toString());
+        txttrabajador.setText(tablalistado.getValueAt(fila, 6).toString());
+        dcfecha_reserva.setDate(Date.valueOf(tablalistado.getValueAt(fila, 7).toString()));
+        dcfecha_ingresa1.setDate(Date.valueOf(tablalistado.getValueAt(fila, 8).toString()));
+        dcfecha_salida.setDate(Date.valueOf(tablalistado.getValueAt(fila, 9).toString()));
+        txtcosto_alojamiento.setText(tablalistado.getValueAt(fila, 10).toString());
+        cboestado.setSelectedItem(tablalistado.getValueAt(fila, 11).toString());
+
     }//GEN-LAST:event_tablalistadoMouseClicked
 
     private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
@@ -508,16 +521,16 @@ public class fmreserva extends javax.swing.JFrame {
     }//GEN-LAST:event_btnbuscarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        if(!txtidreserva.getText().equals("")){//Verifica que no este vacio el producto que se va a eliminar
-            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar el producto?","Confirmar",2);//Pregunta para confirmar la eliminacion
+        if (!txtidreserva.getText().equals("")) {//Verifica que no este vacio la reserva que se va a eliminar
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar la reserva?", "Confirmar", 2);//Pregunta para confirmar la eliminacion
 
-            if(confirmacion==0){//Procede a la eliminacion
-//                fproducto func = new fproducto();
-//                vproductos dts = new vproductos();
+            if (confirmacion == 0) {//Procede a la eliminacion
+                freserva func = new freserva();
+                vreserva dts = new vreserva();
 
-//                dts.setIdh_producto(Integer.parseInt(txtidreserva.getText()));
-//
-//                func.eliminar(dts);
+                dts.setIdh_reserva(Integer.parseInt(txtidreserva.getText()));
+
+                func.eliminar(dts);
                 mostrar("");
                 inhabilitar();
             }
@@ -535,53 +548,72 @@ public class fmreserva extends javax.swing.JFrame {
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         habilitar(); // habilita todas las cajas de texto
         btnguardar.setText("GUARDAR");
-        accion="guardar";
+        accion = "guardar";
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        if (txtidhabitacion.getText().length()==0){ //Valida que numero contenga datos
-            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un nombre para el producto");
+        if (txtidhabitacion.getText().length() == 0) { //Valida que habitacion contenga datos
+            JOptionPane.showConfirmDialog(rootPane, "Debe seleccionar una habitacion");
             txtidhabitacion.requestFocus();
             return;
         }
 
-//        if (txtdescripcion.getText().length()==0){ //Valida que caracteristicas contenga datos
-//            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar una descripción para el producto");
-//            txtdescripcion.requestFocus();
-//            return;
-//        }
-//
-//        if (txtprecio_venta.getText().length()==0){ //Valida que precio contenga datos
-//            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar precio del producto");
-//            txtprecio_venta.requestFocus();
-//            return;
-//        }
-//
-//        vproductos dts = new vproductos();//Crea un nuevo objeto de la clase vproductos
-//        fproducto func = new fproducto();//Llama a todas las funciones de fproductos
+        if (txtidcliente.getText().length() == 0) { //Valida que cliente contenga datos
+            JOptionPane.showConfirmDialog(rootPane, "Debe seleccionar un cliente");
+            txtidcliente.requestFocus();
+            return;
+        }
+
+        if (txtcosto_alojamiento.getText().length() == 0) { //Valida que precio contenga datos
+            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar precio del alojamiento");
+            txtcosto_alojamiento.requestFocus();
+            return;
+        }
+
+        vreserva dts = new vreserva();//Crea un nuevo objeto de la clase vreserva
+        freserva func = new freserva();//Llama a todas las funciones de freserva
+
+        Calendar cal;
+        int d, m, a; //dia mes y anio
+        cal = dcfecha_reserva.getCalendar(); //obtiene fecha selccionada
+        d = cal.get(Calendar.DAY_OF_MONTH);//obtiene dia del mes
+        m = cal.get(Calendar.MONTH);//obtiene mes
+        a = cal.get(Calendar.YEAR) - 1990;//obtiene anio y resta 1990 para obtenerformato correcto
+        dts.setFecha_reservacion(new Date(a, m, d)); //convierte a fecha
+
+        cal = dcfecha_ingresa1.getCalendar(); //obtiene fecha selccionada
+        d = cal.get(Calendar.DAY_OF_MONTH);//obtiene dia del mes
+        m = cal.get(Calendar.MONTH);//obtiene mes
+        a = cal.get(Calendar.YEAR) - 1990;//obtiene anio y resta 1990 para obtenerformato correcto
+        dts.setFecha_ingreso(new Date(a, m, d)); //convierte a fecha
+
+        cal = dcfecha_salida.getCalendar(); //obtiene fecha selccionada
+        d = cal.get(Calendar.DAY_OF_MONTH);//obtiene dia del mes
+        m = cal.get(Calendar.MONTH);//obtiene mes
+        a = cal.get(Calendar.YEAR) - 1990;//obtiene anio y resta 1990 para obtenerformato correcto
+        dts.setFecha_salida(new Date(a, m, d)); //convierte a fecha
 
         //Se asigna los datos de las cajas de texto a las variables
-//        dts.setNombre(txtidhabitacion.getText());
-//        dts.setDescripcion(txtdescripcion.getText());
-//        dts.setPrecio(Double.parseDouble(txtprecio_venta.getText()));
-//
-//        if (accion.equals("guardar")){//Condicion para verificar si se va a guardar o modificar
-//            if(func.insertar(dts)){//Verifica que los datos se esten insertando correctamente
-//                JOptionPane.showMessageDialog(rootPane, "El producto fue registrado correctamente");
-//                mostrar("");//Muestra todos los registros
-//                inhabilitar();
-//            }
-//
-//        }
-//        else if(accion.equals("editar")){//Condicion para editar
-//            dts.setIdh_producto(Integer.parseInt(txtidreserva.getText()));//Convierte lo del getText a un Integer
-//
-//            if(func.editar(dts)){
-//                JOptionPane.showMessageDialog(rootPane, "El producto fue editado correctamente");
-//                mostrar("");
-//                inhabilitar();
-//            }
-//        }
+        dts.setCosto_alojamiento(Double.parseDouble(txtcosto_alojamiento.getText()));
+        int seleccionado = cboestado.getSelectedIndex();
+        dts.setEstado_reserva((String) cboestado.getItemAt(seleccionado));
+
+        if (accion.equals("guardar")) {//Condicion para verificar si se va a guardar o modificar
+            if (func.insertar(dts)) {//Verifica que los datos se esten insertando correctamente
+                JOptionPane.showMessageDialog(rootPane, "La reserva fue registrada correctamente");
+                mostrar("");//Muestra todos los registros
+                inhabilitar();
+            }
+
+        } else if (accion.equals("editar")) {//Condicion para editar
+            dts.setIdh_reserva(Integer.parseInt(txtidreserva.getText()));//Convierte lo del getText a un Integer
+            dts.setIdh_trabajador(Integer.parseInt(txtidtrabajador.getText()));
+            if (func.editar(dts)) {
+                JOptionPane.showMessageDialog(rootPane, "La reserva fue editada correctamente");
+                mostrar("");
+                inhabilitar();
+            }
+        }
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed

@@ -76,8 +76,8 @@ public class freserva {
             pst.setInt(3, dts.getIdh_trabajador());
             pst.setDate(4, (Date) dts.getFecha_reservacion());
             pst.setDate(5, (Date) dts.getFecha_ingreso());
-            pst.setDouble(7, dts.getCosto_alojamiento());
-            pst.setString(8, dts.getEstado_reserva());
+            pst.setDouble(6, dts.getCosto_alojamiento());
+            pst.setString(7, dts.getEstado_reserva());
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
 
@@ -104,9 +104,9 @@ public class freserva {
             pst.setInt(3, dts.getIdh_trabajador());
             pst.setDate(4, (Date) dts.getFecha_reservacion());
             pst.setDate(5, (Date) dts.getFecha_ingreso());
-            pst.setDouble(7, dts.getCosto_alojamiento());
-            pst.setString(8, dts.getEstado_reserva());
-            pst.setInt(9, dts.getIdh_reserva());    
+            pst.setDouble(6, dts.getCosto_alojamiento());
+            pst.setString(7, dts.getEstado_reserva());
+            pst.setInt(8, dts.getIdh_reserva());    
             
            
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
