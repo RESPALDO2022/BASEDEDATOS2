@@ -23,7 +23,7 @@ public class freserva {
 
         //Guarda los títulos de la columna
         String[] titulos = {"ID", "IdHabitacion", "Numero", "IdCliente", "Cliente", "IdTrabajador", "Trabajador", "FechaReserva", "FechaIngreso", "FechaSalida", "CostoAlojamiento", "EstadoReserva"};
-        String[] registro = new String[11];  // almacena el registro de cada columna 
+        String[] registro = new String[12];  // almacena el registro de cada columna 
 
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);  // agregar titulos que ya se tienen 
@@ -35,7 +35,7 @@ public class freserva {
                 + "(select apellido from h_persona where idh_persona=r.idh_trabajador)as trabajadorap,"
                 + "r.fecha_reservacion, r.fecha_ingreso, r.fecha_salida,"
                 + "r.costo_alojamiento, r.estado_reserva from h_reserva r inner join h_habitacion h on r.idh_habitacion=h.idh_habitacion where r.fecha_reservacion like '%" + buscar + "%' order by idh_reserva desc "; //Consulta para obtener los registros de la tabla
-
+       
         try { //declaracion de errores 
             Statement st = cn.createStatement();   // asigna a la variable de tipo Statement la conexion de La BD
             ResultSet rs = st.executeQuery(sSQL); //ejecuta la consulta de arriba  
@@ -76,8 +76,9 @@ public class freserva {
             pst.setInt(3, dts.getIdh_trabajador());
             pst.setDate(4, (Date) dts.getFecha_reservacion());
             pst.setDate(5, (Date) dts.getFecha_ingreso());
-            pst.setDouble(6, dts.getCosto_alojamiento());
-            pst.setString(7, dts.getEstado_reserva());
+            pst.setDate(6, (Date) dts.getFecha_salida());
+            pst.setDouble(7, dts.getCosto_alojamiento());
+            pst.setString(8, dts.getEstado_reserva());
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
 
@@ -94,9 +95,8 @@ public class freserva {
     }
 
     public boolean editar(vreserva dts) {
-        sSQL = "update h_reserva set idh_habitacion=?,idh_cliente=?,idh_trabajador=?,fecha_reservacion=?,fecha_ingreso=?,fecha_salida=?,costo_alojamiento=?,estado_reserva=?" //actualizar tabla reserva
+      sSQL = "update h_reserva set idh_habitacion=?,idh_cliente=?,idh_trabajador=?,fecha_reservacion=?,fecha_ingreso=?,fecha_salida=?,costo_alojamiento=?,estado_reserva=?" //actualizar tabla reserva
                 + "where idh_reserva=?";
-             
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setInt(1, dts.getIdh_habitacion()); //Enviar 1 a 1 todos los valores
@@ -104,9 +104,10 @@ public class freserva {
             pst.setInt(3, dts.getIdh_trabajador());
             pst.setDate(4, (Date) dts.getFecha_reservacion());
             pst.setDate(5, (Date) dts.getFecha_ingreso());
-            pst.setDouble(6, dts.getCosto_alojamiento());
-            pst.setString(7, dts.getEstado_reserva());
-            pst.setInt(8, dts.getIdh_reserva());    
+            pst.setDate(6, (Date) dts.getFecha_salida());
+            pst.setDouble(7, dts.getCosto_alojamiento());
+            pst.setString(8, dts.getEstado_reserva());
+            pst.setInt(9, dts.getIdh_reserva());    
             
            
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement

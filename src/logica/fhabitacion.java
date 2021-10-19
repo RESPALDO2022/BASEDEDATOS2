@@ -52,6 +52,44 @@ public class fhabitacion {
         }
 
     }
+    
+    
+    public DefaultTableModel mostrarvista(String buscar) {  // Mostrar los registros de la tabla habitacion
+        DefaultTableModel modelo;
+
+        //Guarda los títulos de la columna
+        String[] titulos = {"ID", "Numero", "Piso", "Caracteristicas", "Precio", "Tipo", "Disponibilidad"};
+        String[] registro = new String[7];  // almacena el registro de cada columna 
+
+        totalregistros = 0;
+        modelo = new DefaultTableModel(null, titulos);  // agregar titulos que ya se tienen 
+
+        sSQL = "select *from h_habitacion where piso like '%" + buscar + "%' and disponibilidad = 'disponible' order by idh_habitacion"; //Consulta para obtener los registros de las habitaciones disponibles
+
+        try { //declaracion de errores 
+            Statement st = cn.createStatement();   // asigna a la variable de tipo Statement la conexion de La BD
+            ResultSet rs = st.executeQuery(sSQL); //ejecuta la consulta de arriba  
+
+            while (rs.next()) { //todos los registros obtenidos
+                registro[0] = rs.getString("idh_habitacion");
+                registro[1] = rs.getString("numero");
+                registro[2] = rs.getString("piso");
+                registro[3] = rs.getString("caracteristicas");
+                registro[4] = rs.getString("precio");
+                registro[5] = rs.getString("tipo");
+                registro[6] = rs.getString("disponibilidad");
+
+                totalregistros = totalregistros + 1; //Aumenta la variable en 1
+                modelo.addRow(registro);  //agrega a la variable modelo todos los registros
+            }
+            return modelo;   // retorna los valores del modelo si no hay ningun error
+
+        } catch (Exception e) {    // Si hay un error muestra una advertencia 
+            JOptionPane.showConfirmDialog(null, e);
+            return null;
+        }
+
+    }
 
     public boolean insertar(vhabitacion dts) {   // Funcion insertar, recibe todo lo de la clase vhabitacion
         sSQL = "insert into h_habitacion(numero,piso,caracteristicas,precio,tipo,disponibilidad)"

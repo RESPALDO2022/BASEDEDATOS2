@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.freserva;
 
-public class fmreserva extends javax.swing.JFrame {
+public class fmreserva extends javax.swing.JInternalFrame {
 
     public fmreserva() {
         initComponents();
@@ -356,10 +356,25 @@ public class fmreserva extends javax.swing.JFrame {
         });
 
         cboestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ALQUILER", "PAGADA", "ANULADA" }));
+        cboestado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboestadoActionPerformed(evt);
+            }
+        });
 
         btnbuscahabitacion.setText("...");
+        btnbuscahabitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscahabitacionActionPerformed(evt);
+            }
+        });
 
         btnbuscacliente.setText("...");
+        btnbuscacliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscaclienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -457,7 +472,7 @@ public class fmreserva extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dcfecha_salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtcosto_alojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
@@ -644,6 +659,22 @@ public class fmreserva extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcosto_alojamientoActionPerformed
 
+    private void btnbuscahabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscahabitacionActionPerformed
+       fmvistahabitacion form = new fmvistahabitacion();
+       form.toFront();
+       form.setVisible(true); 
+    }//GEN-LAST:event_btnbuscahabitacionActionPerformed
+
+    private void btnbuscaclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscaclienteActionPerformed
+       fmvistacliente form = new fmvistacliente();
+       form.toFront();
+       form.setVisible(true); 
+    }//GEN-LAST:event_btnbuscaclienteActionPerformed
+
+    private void cboestadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboestadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboestadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -710,14 +741,14 @@ public class fmreserva extends javax.swing.JFrame {
     private javax.swing.JLabel lbltotalregistros;
     private javax.swing.JTable tablalistado;
     private javax.swing.JTextField txtbuscar;
-    private javax.swing.JTextField txtcliente;
+    public static javax.swing.JTextField txtcliente;
     private javax.swing.JTextField txtcosto_alojamiento;
-    private javax.swing.JTextField txtidcliente;
-    private javax.swing.JTextField txtidhabitacion;
+    public static javax.swing.JTextField txtidcliente;
+    public static javax.swing.JTextField txtidhabitacion;
     private javax.swing.JTextField txtidreserva;
-    private javax.swing.JTextField txtidtrabajador;
-    private javax.swing.JTextField txtnumero;
-    private javax.swing.JTextField txttrabajador;
+    public static javax.swing.JTextField txtidtrabajador;
+    public static javax.swing.JTextField txtnumero;
+    public static javax.swing.JTextField txttrabajador;
     // End of variables declaration//GEN-END:variables
 
 }
