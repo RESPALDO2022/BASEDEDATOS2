@@ -1,5 +1,6 @@
 package logica;
 
+import Datos.vproductos;
 import Datos.vreserva;
 import java.sql.ResultSet;
 import java.sql.Connection;
