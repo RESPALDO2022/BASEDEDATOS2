@@ -488,10 +488,11 @@ private String accion="guardar"; // determina si la accion es guardar o editar
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 50, 460, 160));
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
-
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/factura.jpeg"))); // NOI18N
         jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, java.awt.BorderLayout.PAGE_START);
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 981, 500));
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
