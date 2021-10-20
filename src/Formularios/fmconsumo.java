@@ -224,7 +224,7 @@ public class fmconsumo extends javax.swing.JInternalFrame{
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Estado");
 
-        cboestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aceptado", "Cancelado", " " }));
+        cboestado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendiente", "Cancelado", " " }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
