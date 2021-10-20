@@ -254,7 +254,7 @@ public class fminicio extends javax.swing.JFrame {
     public static javax.swing.JMenu mnuconsultas;
     private javax.swing.JMenu mnuinicio;
     private javax.swing.JMenu mnusalir;
-    private javax.swing.JDesktopPane principal;
+    public static javax.swing.JDesktopPane principal;
     // End of variables declaration//GEN-END:variables
 
 }

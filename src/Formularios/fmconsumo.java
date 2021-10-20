@@ -1,4 +1,3 @@
-
 package Formularios;
 
 import Datos.vconsumo;
@@ -6,12 +5,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.fconsumo;
 
-public class fmconsumo extends javax.swing.JFrame {
+public class fmconsumo extends javax.swing.JInternalFrame{
 
     public static String idreserva;
     public static String cliente;
-    
-    
+
     public fmconsumo() {
         initComponents();
         mostrar(idreserva);
@@ -19,85 +17,82 @@ public class fmconsumo extends javax.swing.JFrame {
         txtidreserva.setText(idreserva);
         inhabilitar();
     }
-    
-    private String accion="guardar"; // determina si la accion es guardar o editar
-    
-    void ocultar_columnas(){ //Oculta las columnas que estan de mas en la tabla
-    tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
-    tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
-    tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
-    
-    tablalistado.getColumnModel().getColumn(1).setMaxWidth(0);
-    tablalistado.getColumnModel().getColumn(1).setMinWidth(0);
-    tablalistado.getColumnModel().getColumn(1).setPreferredWidth(0);
-    
-    tablalistado.getColumnModel().getColumn(2).setMaxWidth(0);
-    tablalistado.getColumnModel().getColumn(2).setMinWidth(0);
-    tablalistado.getColumnModel().getColumn(2).setPreferredWidth(0);
-    }
-    
-    void inhabilitar (){ // Desabilita los botones para algunas operaciones
-    txtidconsumo.setVisible(false);   
-    txtidreserva.setVisible(false);
-    txtcliente.setEnabled(false);
-    txtidproducto.setVisible(false);
-    txtproducto.setEnabled(false);
-    txtcantidad.setEnabled(false);
-    txtprecioventa.setEnabled(false);
-    cboestado.setEnabled(false);
 
-    
-    btnguardar.setEnabled(false);
-    btncancelar.setEnabled(false);
-    btneliminar.setEnabled(false);
-    
-    txtidconsumo.setText("");
-    txtprecioventa.setText("");
-    txtidproducto.setText("");
-    txtproducto.setText("");
-    txtcantidad.setText("");
-    }
-    
-    void habilitar (){// Habilita los botones para algunas operaciones
-    txtidconsumo.setVisible(false);   
-    txtidreserva.setVisible(false);
-    txtcliente.setEnabled(true);
-    txtidproducto.setVisible(false);
-    txtproducto.setEnabled(true);
-    txtcantidad.setEnabled(true);
-    txtprecioventa.setEnabled(true);
-    cboestado.setEnabled(true);
+    private String accion = "guardar"; // determina si la accion es guardar o editar
 
-    
-    btnguardar.setEnabled(true);
-    btncancelar.setEnabled(true);
-    btneliminar.setEnabled(true);
-    
-    txtidconsumo.setText("");
-    txtprecioventa.setText("");
-    txtidproducto.setText("");
-    txtproducto.setText("");
-    txtcantidad.setText("");
-    
-    }
-    
-    void mostrar(String buscar){ // Realizar la busqueda
-    try{
-        DefaultTableModel modelo; 
-        fconsumo func=new fconsumo(); //llama a la clase fproducto
-        modelo=func.mostrar(buscar);// Instancia la funcion mostrar de fproducto
-        
-        tablalistado.setModel(modelo);//Asigna a la tabla los valores guardados en modelo
-        ocultar_columnas(); //llama al metodo ocultar
-        lbltotalregistros.setText("Total Registros"+Integer.toString(func.totalregistros)); //Muestra en la etiqueta el total de productos registrados
-    lblconsumo.setText("Consumo total Q."+func.totalconsumo);
-        
-    }catch(Exception e){
-        JOptionPane.showConfirmDialog(rootPane,e);
-    }
+    void ocultar_columnas() { //Oculta las columnas que estan de mas en la tabla
+        tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+        tablalistado.getColumnModel().getColumn(1).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(1).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(1).setPreferredWidth(0);
+
+        tablalistado.getColumnModel().getColumn(2).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(2).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(2).setPreferredWidth(0);
     }
 
-  
+    void inhabilitar() { // Desabilita los botones para algunas operaciones
+        txtidconsumo.setVisible(false);
+        txtidreserva.setVisible(false);
+        txtcliente.setEnabled(false);
+        txtidproducto.setVisible(false);
+        txtproducto.setEnabled(false);
+        txtcantidad.setEnabled(false);
+        txtprecioventa.setEnabled(false);
+        cboestado.setEnabled(false);
+
+        btnguardar.setEnabled(false);
+        btncancelar.setEnabled(false);
+        btneliminar.setEnabled(false);
+
+        txtidconsumo.setText("");
+        txtprecioventa.setText("");
+        txtidproducto.setText("");
+        txtproducto.setText("");
+        txtcantidad.setText("");
+    }
+
+    void habilitar() {// Habilita los botones para algunas operaciones
+        txtidconsumo.setVisible(false);
+        txtidreserva.setVisible(false);
+        txtcliente.setEnabled(true);
+        txtidproducto.setVisible(false);
+        txtproducto.setEnabled(true);
+        txtcantidad.setEnabled(true);
+        txtprecioventa.setEnabled(true);
+        cboestado.setEnabled(true);
+
+        btnguardar.setEnabled(true);
+        btncancelar.setEnabled(true);
+        btneliminar.setEnabled(true);
+
+        txtidconsumo.setText("");
+        txtprecioventa.setText("");
+        txtidproducto.setText("");
+        txtproducto.setText("");
+        txtcantidad.setText("");
+
+    }
+
+    void mostrar(String buscar) { // Realizar la busqueda
+        try {
+            DefaultTableModel modelo;
+            fconsumo func = new fconsumo(); //llama a la clase fproducto
+            modelo = func.mostrar(buscar);// Instancia la funcion mostrar de fproducto
+
+            tablalistado.setModel(modelo);//Asigna a la tabla los valores guardados en modelo
+            ocultar_columnas(); //llama al metodo ocultar
+            lbltotalregistros.setText("Total Registros" + Integer.toString(func.totalregistros)); //Muestra en la etiqueta el total de productos registrados
+            lblconsumo.setText("Consumo total Q." + func.totalconsumo);
+
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -211,6 +206,11 @@ public class fmconsumo extends javax.swing.JFrame {
         });
 
         btnbuscarproducto.setText("jButton1");
+        btnbuscarproducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbuscarproductoActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Precio venta");
@@ -272,7 +272,7 @@ public class fmconsumo extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cboestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtprecioventa, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,20 +280,16 @@ public class fmconsumo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(txtidconsumo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtidreserva, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtidproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnbuscarproducto))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtcliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtidreserva, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtproducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtidproducto, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnbuscarproducto)
+                    .addComponent(jLabel4))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtcantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -422,24 +418,23 @@ public class fmconsumo extends javax.swing.JFrame {
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         habilitar(); // habilita todas las cajas de texto
         btnguardar.setText("GUARDAR");
-        accion="guardar";
+        accion = "guardar";
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        if (txtidproducto.getText().length()==0){ //Valida que numero contenga datos
+        if (txtidproducto.getText().length() == 0) { //Valida que numero contenga datos
             JOptionPane.showConfirmDialog(rootPane, "Debe seleccionar un producto");
             btnbuscarproducto.requestFocus();
             return;
         }
 
-
-        if (txtcantidad.getText().length()==0){ //Valida que precio contenga datos
+        if (txtcantidad.getText().length() == 0) { //Valida que precio contenga datos
             JOptionPane.showConfirmDialog(rootPane, "Debe ingresar una cantidad de consumo");
             txtcantidad.requestFocus();
             return;
         }
-        
-        if (txtprecioventa.getText().length()==0){ //Valida que precio contenga datos
+
+        if (txtprecioventa.getText().length() == 0) { //Valida que precio contenga datos
             JOptionPane.showConfirmDialog(rootPane, "Debe ingresar una precio de venta");
             txtprecioventa.requestFocus();
             return;
@@ -453,26 +448,24 @@ public class fmconsumo extends javax.swing.JFrame {
         dts.setIdh_producto(Integer.parseInt(txtidproducto.getText()));
         dts.setCantidad(Double.parseDouble(txtcantidad.getText()));
         dts.setCosto(Double.parseDouble(txtprecioventa.getText()));
-        
-        int seleccionado = cboestado.getSelectedIndex();
-        dts.setEstado((String)cboestado.getItemAt(seleccionado));
-        
 
-        if (accion.equals("guardar")){//Condicion para verificar si se va a guardar o modificar
-            if(func.insertar(dts)){//Verifica que los datos se esten insertando correctamente
-                JOptionPane.showMessageDialog(rootPane, "El consumo "+txtproducto.getText()+" del cliente  "
-                +txtcliente.getText()+" ha sido registrado correctamente");
+        int seleccionado = cboestado.getSelectedIndex();
+        dts.setEstado((String) cboestado.getItemAt(seleccionado));
+
+        if (accion.equals("guardar")) {//Condicion para verificar si se va a guardar o modificar
+            if (func.insertar(dts)) {//Verifica que los datos se esten insertando correctamente
+                JOptionPane.showMessageDialog(rootPane, "El consumo " + txtproducto.getText() + " del cliente  "
+                        + txtcliente.getText() + " ha sido registrado correctamente");
                 mostrar(idreserva);//Muestra todos los registros
                 inhabilitar();
             }
 
-        }
-        else if(accion.equals("editar")){//Condicion para editar
+        } else if (accion.equals("editar")) {//Condicion para editar
             dts.setIdh_consumo(Integer.parseInt(txtidconsumo.getText()));//Convierte lo del getText a un Integer
 
-            if(func.editar(dts)){
+            if (func.editar(dts)) {
                 JOptionPane.showMessageDialog(rootPane, "El consumo del cliente "
-                +txtcliente.getText()+" ha sido modificado correctamente");
+                        + txtcliente.getText() + " ha sido modificado correctamente");
                 mostrar(idreserva);
                 inhabilitar();
             }
@@ -494,17 +487,17 @@ public class fmconsumo extends javax.swing.JFrame {
         txtidconsumo.setText(tablalistado.getValueAt(fila, 0).toString());
         txtidreserva.setText(tablalistado.getValueAt(fila, 1).toString());
         txtidproducto.setText(tablalistado.getValueAt(fila, 2).toString());
-        txtproducto.setText(tablalistado.getValueAt(fila, 3).toString());       
+        txtproducto.setText(tablalistado.getValueAt(fila, 3).toString());
         txtcantidad.setText(tablalistado.getValueAt(fila, 4).toString());
         txtprecioventa.setText(tablalistado.getValueAt(fila, 5).toString());
         cboestado.setSelectedItem(tablalistado.getValueAt(fila, 6).toString());
     }//GEN-LAST:event_tablalistadoMouseClicked
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        if(!txtidconsumo.getText().equals("")){//Verifica que no este vacio el producto que se va a eliminar
-            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar el consumo","Confirmar",2);//Pregunta para confirmar la eliminacion
+        if (!txtidconsumo.getText().equals("")) {//Verifica que no este vacio el producto que se va a eliminar
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar el consumo", "Confirmar", 2);//Pregunta para confirmar la eliminacion
 
-            if(confirmacion==0){//Procede a la eliminacion
+            if (confirmacion == 0) {//Procede a la eliminacion
                 fconsumo func = new fconsumo();
                 vconsumo dts = new vconsumo();
 
@@ -540,6 +533,12 @@ public class fmconsumo extends javax.swing.JFrame {
     private void txtprecioventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtprecioventaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtprecioventaActionPerformed
+
+    private void btnbuscarproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarproductoActionPerformed
+        fmvistaproducto form = new fmvistaproducto();
+        form.toFront();
+        form.setVisible(true);
+    }//GEN-LAST:event_btnbuscarproductoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -601,9 +600,9 @@ public class fmconsumo extends javax.swing.JFrame {
     private javax.swing.JTextField txtcantidad;
     private javax.swing.JTextField txtcliente;
     private javax.swing.JTextField txtidconsumo;
-    private javax.swing.JTextField txtidproducto;
+    public static javax.swing.JTextField txtidproducto;
     private javax.swing.JTextField txtidreserva;
-    private javax.swing.JTextField txtprecioventa;
-    private javax.swing.JTextField txtproducto;
+    public static javax.swing.JTextField txtprecioventa;
+    public static javax.swing.JTextField txtproducto;
     // End of variables declaration//GEN-END:variables
 }
