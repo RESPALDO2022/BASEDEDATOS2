@@ -126,7 +126,7 @@ public class fmconsumo extends javax.swing.JInternalFrame{
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -310,7 +310,7 @@ public class fmconsumo extends javax.swing.JInternalFrame{
                 .addGap(34, 34, 34))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 410, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 410, -1));
 
         jPanel3.setBackground(new java.awt.Color(249, 246, 232));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro de Consumos"));
@@ -372,7 +372,7 @@ public class fmconsumo extends javax.swing.JInternalFrame{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblconsumo)
-                .addGap(76, 76, 76)
+                .addGap(74, 74, 74)
                 .addComponent(lbltotalregistros)
                 .addContainerGap())
         );
@@ -385,14 +385,14 @@ public class fmconsumo extends javax.swing.JInternalFrame{
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btneliminar)
                     .addComponent(btnsalir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbltotalregistros)
-                    .addComponent(lblconsumo))
-                .addContainerGap())
+                    .addComponent(lblconsumo)
+                    .addComponent(lbltotalregistros))
+                .addGap(20, 20, 20))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, -1, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
         jLabel1.setText("CONSUMO");
@@ -492,7 +492,7 @@ public class fmconsumo extends javax.swing.JInternalFrame{
         txtprecioventa.setText(tablalistado.getValueAt(fila, 5).toString());
         cboestado.setSelectedItem(tablalistado.getValueAt(fila, 6).toString());
     }//GEN-LAST:event_tablalistadoMouseClicked
-
+    
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
         if (!txtidconsumo.getText().equals("")) {//Verifica que no este vacio el producto que se va a eliminar
             int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar el consumo", "Confirmar", 2);//Pregunta para confirmar la eliminacion

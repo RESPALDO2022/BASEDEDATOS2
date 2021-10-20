@@ -29,9 +29,7 @@ public class fconsumo {
         totalconsumo =0.0;
         modelo = new DefaultTableModel(null, titulos);  // agregar titulos que ya se tienen 
 
-        sSQL = "select c.idh_consumo, c.idh_reserva,c.idh_producto,p.nombre,c.cantidad,c.costo"+
-               "c.estado from h_consumo c inner join h_producto p on c.idh_producto = p.idh_producto"+
-               "where c.idh_reserva =" + buscar + " order by c.idh_consumo desc "; //Consulta para obtener los registros de la tabla
+        sSQL = "select c.idh_consumo, c.idh_reserva,c.idh_producto,p.nombre,c.cantidad,c.costo,c.estado from h_consumo c inner join h_producto p on c.idh_producto = p.idh_producto where c.idh_reserva like '%" + buscar + "%' order by c.idh_consumo desc "; //Consulta para obtener los registros de la tabla
 
         try { //declaracion de errores 
             Statement st = cn.createStatement();   // asigna a la variable de tipo Statement la conexion de La BD
@@ -60,8 +58,8 @@ public class fconsumo {
     }
 
     public boolean insertar(vconsumo dts) {   // Funcion insertar, recibe todo lo de la clase vconsumo
-        sSQL = "insert into h_consumo(idh_reserva,idh_producto,cantidad,costo,estado)"
-                + "values (?,?,?,?,?)";
+        sSQL = "insert into h_consumo(idh_reserva,idh_producto,cantidad,costo,estado)"+
+                "values (?,?,?,?,?)";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setInt(1, dts.getIdh_reserva()); //Enviar 1 a 1 todos los valores
