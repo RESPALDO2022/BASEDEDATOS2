@@ -17,7 +17,7 @@ public class ffactura {
     private String sSQL = "";//almacena la cadena de conexion
     public Integer totalregistros; // Total de registros tiene
 
-    public DefaultTableModel mostrar(String buscar) {  // Mostrar los registros de la tabla producto
+    public DefaultTableModel mostrar(String buscar) {  // Mostrar los registros de la tabla factura
         DefaultTableModel modelo;
 
         //Guarda los títulos de la columna
@@ -77,7 +77,7 @@ public class ffactura {
     }
 
     public boolean editar(vfactura dts) {
-        sSQL = "update h_factura set idh_reserva=?,numero=?,total=?,fecha=?" //actualizar tabla producto
+        sSQL = "update h_factura set idh_reserva=?,numero=?,total=?,fecha=?" //actualizar tabla factura
                 + "where idh_factura=?";
 
         try {
@@ -108,7 +108,7 @@ public class ffactura {
 
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL); // prepara la cadena para poder insertar los registros
-            pst.setInt(1, dts.getIdh_factura());// El indice 1, es el ID producto para indicar que se elimina
+            pst.setInt(1, dts.getIdh_factura());// El indice 1, es el ID factura para indicar que se elimina
             int n = pst.executeUpdate(); //almacena el estado de la ejecucucion del Statement
 
             if (n != 0) {   //Revisa si esta vacio

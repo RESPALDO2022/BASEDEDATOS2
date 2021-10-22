@@ -4,138 +4,130 @@ import Datos.vfactura;
 import Datos.vhabitacion;
 import Datos.vreserva;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.fconsumo;
 import logica.ffactura;
 import logica.fhabitacion;
-import logica.fproducto;
 import logica.freserva;
 
-
-public class fmfactura extends javax.swing.JFrame {
+public class fmfactura extends javax.swing.JInternalFrame {
 
     public fmfactura() {
         initComponents();
-       mostrar(idreserva);
-       inhabilitar ();
-       txtidreserva.setText(idreserva);
-       txtcliente.setText(cliente);
-       txthabitacion.setText(habitacion);
-       txtidhabitacion.setText(idhabitacion);
-       txttotalreserva.setText(Double.toString(totalreserva));
-       
-       fconsumo func = new fconsumo();
-       func.mostrar(idreserva);
-       
-       txttotalpago.setText(Double.toString(totalreserva+func.totalconsumo));
-       
+        mostrar(idreserva);
+        inhabilitar();
+        txtidreserva.setText(idreserva);
+        txtcliente.setText(cliente);
+        txthabitacion.setText(habitacion);
+        txtidhabitacion.setText(idhabitacion);
+        txttotalreserva.setText(Double.toString(totalreserva));
+
+        fconsumo func = new fconsumo();
+        func.mostrar(idreserva);
+
+        txttotalpago.setText(Double.toString(totalreserva + func.totalconsumo));
+
     }
-    
-    
-private String accion="guardar"; // determina si la accion es guardar o editar
-    private static String idreserva;
+
+    private String accion = "guardar"; // determina si la accion es guardar o editar
+    public static String idreserva;
     public static String cliente;
     public static String idhabitacion;
     public static String habitacion;
     public static Double totalreserva;
-    
-    void ocultar_columnas(){ //Oculta las columnas que estan de mas en la tabla
-    tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
-    tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
-    tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
-    
-    tablalistado.getColumnModel().getColumn(1).setMaxWidth(0);
-    tablalistado.getColumnModel().getColumn(1).setMinWidth(0);
-    tablalistado.getColumnModel().getColumn(1).setPreferredWidth(0);
-    
-    
+
+    void ocultar_columnas() { //Oculta las columnas que estan de mas en la tabla
+        tablalistado.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+        tablalistado.getColumnModel().getColumn(1).setMaxWidth(0);
+        tablalistado.getColumnModel().getColumn(1).setMinWidth(0);
+        tablalistado.getColumnModel().getColumn(1).setPreferredWidth(0);
+
     }
-    
-    void ocultar_columnasconsumo(){ //Oculta las columnas que estan de mas en la tabla
-    tablalistadoconsumo.getColumnModel().getColumn(0).setMaxWidth(0);
-    tablalistadoconsumo.getColumnModel().getColumn(0).setMinWidth(0);
-    tablalistadoconsumo.getColumnModel().getColumn(0).setPreferredWidth(0);
-    
-    tablalistadoconsumo.getColumnModel().getColumn(1).setMaxWidth(0);
-    tablalistadoconsumo.getColumnModel().getColumn(1).setMinWidth(0);
-    tablalistadoconsumo.getColumnModel().getColumn(1).setPreferredWidth(0);
-    
-    
-    tablalistadoconsumo.getColumnModel().getColumn(2).setMaxWidth(0);
-    tablalistadoconsumo.getColumnModel().getColumn(2).setMinWidth(0);
-    tablalistadoconsumo.getColumnModel().getColumn(2).setPreferredWidth(0);
+
+    void ocultar_columnasconsumo() { //Oculta las columnas que estan de mas en la tabla
+        tablalistadoconsumo.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablalistadoconsumo.getColumnModel().getColumn(0).setMinWidth(0);
+        tablalistadoconsumo.getColumnModel().getColumn(0).setPreferredWidth(0);
+
+        tablalistadoconsumo.getColumnModel().getColumn(1).setMaxWidth(0);
+        tablalistadoconsumo.getColumnModel().getColumn(1).setMinWidth(0);
+        tablalistadoconsumo.getColumnModel().getColumn(1).setPreferredWidth(0);
+
+        tablalistadoconsumo.getColumnModel().getColumn(2).setMaxWidth(0);
+        tablalistadoconsumo.getColumnModel().getColumn(2).setMinWidth(0);
+        tablalistadoconsumo.getColumnModel().getColumn(2).setPreferredWidth(0);
     }
-    
-    void inhabilitar (){ // Desabilita los botones para algunas operaciones
-    txtidreserva.setVisible(false);
-    txtidfactura.setVisible(false);
-    txtcliente.setEnabled(false);
-    txtnumerofactura.setEnabled(false);
-    txttotalreserva.setEnabled(false);
-    txttotalpago.setEnabled(false);
-    dcfechapago.setEnabled(false);
-    txtidhabitacion.setVisible(false);
-    txthabitacion.setEnabled(false);
-    
-    btnguardar.setEnabled(false);
-    btncancelar.setEnabled(false);
-    btneliminar.setEnabled(false);
-    
-    txtidfactura.setText("");
-    txttotalpago.setText("");
-    txtnumerofactura.setText("");
-    
+
+    void inhabilitar() { // Desabilita los botones para algunas operaciones
+        txtidreserva.setVisible(false);
+        txtidfactura.setVisible(false);
+        txtcliente.setEnabled(false);
+        txtnumerofactura.setEnabled(false);
+        txttotalreserva.setEnabled(false);
+        txttotalpago.setEnabled(false);
+        dcfechapago.setEnabled(false);
+        txtidhabitacion.setVisible(false);
+        txthabitacion.setEnabled(false);
+
+        btnguardar.setEnabled(false);
+        btncancelar.setEnabled(false);
+        btneliminar.setEnabled(false);
+
+        txtidfactura.setText("");
+        txttotalpago.setText("");
+        txtnumerofactura.setText("");
+
     }
-    
-    void habilitar (){// Habilita los botones para algunas operaciones
-    txtidreserva.setVisible(true);
-    txtidfactura.setVisible(true);
-    txtcliente.setEnabled(true);
-    txtnumerofactura.setEnabled(true);
-    txttotalreserva.setEnabled(true);
-    txttotalpago.setEnabled(true);
-    dcfechapago.setEnabled(true);
-    txtidhabitacion.setVisible(true);
-    txthabitacion.setEnabled(true);
-    
-    btnguardar.setEnabled(true);
-    btncancelar.setEnabled(true);
-    btneliminar.setEnabled(true);
-    
-    txtidfactura.setText("");
-    //txttotalpago.setText("");
-    txtnumerofactura.setText("");
-    
+
+    void habilitar() {// Habilita los botones para algunas operaciones
+        txtidreserva.setVisible(true);
+        txtidfactura.setVisible(true);
+        txtcliente.setEnabled(true);
+        txtnumerofactura.setEnabled(true);
+        txttotalreserva.setEnabled(true);
+        txttotalpago.setEnabled(true);
+        dcfechapago.setEnabled(true);
+        txtidhabitacion.setVisible(true);
+        txthabitacion.setEnabled(true);
+
+        btnguardar.setEnabled(true);
+        btncancelar.setEnabled(true);
+        btneliminar.setEnabled(true);
+
+        txtidfactura.setText("");
+        //txttotalpago.setText("");
+        txtnumerofactura.setText("");
+
     }
-    
-    void mostrar(String buscar){ // Realizar la busqueda
-    try{
-        DefaultTableModel modelo; 
-        ffactura func=new ffactura(); //llama a la clase ffactura
-        modelo=func.mostrar(buscar);// Instancia la funcion mostrar de fproducto
-        
-        tablalistado.setModel(modelo);//Asigna a la tabla los valores guardados en modelo
-        ocultar_columnas(); //llama al metodo ocultar
-        lbltotalregistros.setText("Total facturas"+Integer.toString(func.totalregistros)); //Muestra en la etiqueta el total de facturas registrados
-        
-        //mostrar los datos de los consumos
-        fconsumo func2 = new fconsumo();
-        modelo = func2.mostrar(buscar);
-        tablalistadoconsumo.setModel(modelo);
-        ocultar_columnasconsumo();
-        
-        lbltotalregistrosconsumo.setText("Total consumos: "+func2.totalregistros);
-        lbltotalconsumo.setText("Consumo total: Q. "+func2.totalconsumo);
-    }catch(Exception e){
-        JOptionPane.showConfirmDialog(rootPane,e);
+
+    void mostrar(String buscar) { // Realizar la busqueda
+        try {
+            DefaultTableModel modelo;
+            ffactura func = new ffactura(); //llama a la clase ffactura
+            modelo = func.mostrar(buscar);// Instancia la funcion mostrar de ffactura
+
+            tablalistado.setModel(modelo);//Asigna a la tabla los valores guardados en modelo
+            ocultar_columnas(); //llama al metodo ocultar
+            lbltotalregistros.setText("Total facturas" + Integer.toString(func.totalregistros)); //Muestra en la etiqueta el total de facturas registrados
+
+            //mostrar los datos de los consumos
+            fconsumo func2 = new fconsumo();
+            modelo = func2.mostrar(buscar);
+            tablalistadoconsumo.setModel(modelo);
+            ocultar_columnasconsumo();
+
+            lbltotalregistrosconsumo.setText("Total consumos: " + func2.totalregistros);
+            lbltotalconsumo.setText("Consumo total: Q. " + func2.totalconsumo);
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(rootPane, e);
+        }
     }
-    }
-    
-    
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -163,9 +155,6 @@ private String accion="guardar"; // determina si la accion es guardar o editar
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablalistado = new javax.swing.JTable();
-        jLabel8 = new javax.swing.JLabel();
-        txtbuscar = new javax.swing.JTextField();
-        btnbuscar = new javax.swing.JButton();
         btneliminar = new javax.swing.JButton();
         btnsalir = new javax.swing.JButton();
         lbltotalregistros = new javax.swing.JLabel();
@@ -332,17 +321,15 @@ private String accion="guardar"; // determina si la accion es guardar o editar
                     .addComponent(txttotalpago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(34, 151, Short.MAX_VALUE))
+                    .addComponent(jLabel10)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(dcfechapago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnguardar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btncancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, 420));
@@ -369,23 +356,6 @@ private String accion="guardar"; // determina si la accion es guardar o editar
         });
         jScrollPane2.setViewportView(tablalistado);
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Producto");
-
-        txtbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtbuscarActionPerformed(evt);
-            }
-        });
-
-        btnbuscar.setBackground(new java.awt.Color(235, 191, 145));
-        btnbuscar.setText("Buscar");
-        btnbuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbuscarActionPerformed(evt);
-            }
-        });
-
         btneliminar.setBackground(new java.awt.Color(235, 191, 145));
         btneliminar.setText("Eliminar");
         btneliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -410,20 +380,14 @@ private String accion="guardar"; // determina si la accion es guardar o editar
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(63, 63, 63)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnbuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btneliminar)
                         .addGap(18, 18, 18)
                         .addComponent(btnsalir)))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbltotalregistros)
@@ -437,10 +401,7 @@ private String accion="guardar"; // determina si la accion es guardar o editar
                 .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnsalir)
-                    .addComponent(btneliminar)
-                    .addComponent(btnbuscar)
-                    .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(btneliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbltotalregistros)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -525,74 +486,68 @@ private String accion="guardar"; // determina si la accion es guardar o editar
     private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
         habilitar(); // habilita todas las cajas de texto
         btnguardar.setText("GUARDAR");
-        accion="guardar";
+        accion = "guardar";
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-//        if (txtidreserva.getText().length()==0){ //Valida que numero contenga datos
-//            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un nombre para el producto");
-//            txtidreserva.requestFocus();
-//            return;
-//        }
 
-        if (txtnumerofactura.getText().length()==0){ //Valida que caracteristicas contenga datos
+        if (txtnumerofactura.getText().length() == 0) { //Valida que caracteristicas contenga datos
             JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un numero de factura");
             txtnumerofactura.requestFocus();
             return;
         }
 
-        if (txttotalpago.getText().length()==0){ //Valida que precio contenga datos
+        if (txttotalpago.getText().length() == 0) { //Valida que precio contenga datos
             JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un total de pago de la factura");
             txttotalpago.requestFocus();
             return;
         }
 
-        vfactura dts = new vfactura();//Crea un nuevo objeto de la clase vproductos
-        ffactura func = new ffactura();//Llama a todas las funciones de fproductos
+        vfactura dts = new vfactura();//Crea un nuevo objeto de la clase vfactura
+        ffactura func = new ffactura();//Llama a todas las funciones de ffactura
 
         //Se asigna los datos de las cajas de texto a las variables
         dts.setIdh_reserva(Integer.parseInt(txtidreserva.getText()));
         dts.setNumero(txtnumerofactura.getText());
         dts.setTotal(Double.parseDouble(txttotalpago.getText()));
-        
+
         Calendar cal;
-        int d,m,a;
+        int d, m, a;
         cal = dcfechapago.getCalendar();
         d = cal.get(Calendar.DAY_OF_MONTH);
         m = cal.get(Calendar.MONTH);
-        a = cal.get(Calendar.YEAR)-1990;
-        
-        dts.setFecha(new Date (a,m,d));
-        
-        if (accion.equals("guardar")){//Condicion para verificar si se va a guardar o modificar
-            if(func.insertar(dts)){//Verifica que los datos se esten insertando correctamente
-                JOptionPane.showMessageDialog(rootPane, "El pago por Q."+txttotalpago.getText()+
-                        " del cliente "+txtcliente.getText()+"ha sido realizado con exito");
+        a = cal.get(Calendar.YEAR) - 1990;
+
+        dts.setFecha(new Date(a, m, d));
+
+        if (accion.equals("guardar")) {//Condicion para verificar si se va a guardar o modificar
+            if (func.insertar(dts)) {//Verifica que los datos se esten insertando correctamente
+                JOptionPane.showMessageDialog(rootPane, "El pago por Q." + txttotalpago.getText()
+                        + " del cliente " + txtcliente.getText() + "ha sido realizado con exito");
                 mostrar(idreserva);//Muestra todos los registros
                 inhabilitar();
                 //Desocupar la habitación
-                
+
                 fhabitacion func2 = new fhabitacion();
                 vhabitacion dts2 = new vhabitacion();
-                
+
                 dts2.setIdh_habitacion(Integer.parseInt(txtidhabitacion.getText()));
                 func2.desocupar(dts2);
-                
+
                 //Cancelar o pagar la reserva
                 freserva func3 = new freserva();
                 vreserva dts3 = new vreserva();
-                
+
                 dts3.setIdh_reserva(Integer.parseInt(txtidreserva.getText()));
                 func3.pagar(dts3);
             }
 
-        }
-        else if(accion.equals("editar")){//Condicion para editar
+        } else if (accion.equals("editar")) {//Condicion para editar
             dts.setIdh_factura(Integer.parseInt(txtidfactura.getText()));//Convierte lo del getText a un Integer
 
-            if(func.editar(dts)){
-                JOptionPane.showMessageDialog(rootPane, "El pago del cliente. "+
-                        txtcliente.getText()+"ha sido modificado correctamente");
+            if (func.editar(dts)) {
+                JOptionPane.showMessageDialog(rootPane, "El pago del cliente. "
+                        + txtcliente.getText() + "ha sido modificado correctamente");
                 mostrar(idreserva);
                 inhabilitar();
             }
@@ -612,31 +567,23 @@ private String accion="guardar"; // determina si la accion es guardar o editar
         int fila = tablalistado.rowAtPoint(evt.getPoint());//Almacena los registros donde se haya hecho click
 
         txtidfactura.setText(tablalistado.getValueAt(fila, 0).toString());
-        txtidreserva.setText(tablalistado.getValueAt(fila, 1).toString());
-        txtdescripcion.setText(tablalistado.getValueAt(fila, 2).toString());
-        txtprecio_venta.setText(tablalistado.getValueAt(fila, 3).toString());
+        txtnumerofactura.setText(tablalistado.getValueAt(fila, 2).toString());
+        txttotalpago.setText(tablalistado.getValueAt(fila, 3).toString());
+        dcfechapago.setDate(Date.valueOf(tablalistado.getValueAt(fila, 4).toString()));
     }//GEN-LAST:event_tablalistadoMouseClicked
 
-    private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtbuscarActionPerformed
-
-    private void btnbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbuscarActionPerformed
-        mostrar(txtbuscar.getText());
-    }//GEN-LAST:event_btnbuscarActionPerformed
-
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        if(!txtidfactura.getText().equals("")){//Verifica que no este vacio el producto que se va a eliminar
-            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar el producto?","Confirmar",2);//Pregunta para confirmar la eliminacion
+        if (!txtidfactura.getText().equals("")) {//Verifica que no este vacia la fcatura que se va a eliminar
+            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar la factura?", "Confirmar", 2);//Pregunta para confirmar la eliminacion
 
-            if(confirmacion==0){//Procede a la eliminacion
-                fproducto func = new fproducto();
-                vproductos dts = new vproductos();
+            if (confirmacion == 0) {//Procede a la eliminacion
+                ffactura func = new ffactura();
+                vfactura dts = new vfactura();
 
-                dts.setIdh_producto(Integer.parseInt(txtidfactura.getText()));
+                dts.setIdh_factura(Integer.parseInt(txtidfactura.getText()));
 
                 func.eliminar(dts);
-                mostrar("");
+                mostrar(idreserva);
                 inhabilitar();
             }
         }
@@ -698,7 +645,6 @@ private String accion="guardar"; // determina si la accion es guardar o editar
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnbuscar;
     private javax.swing.JButton btncancelar;
     private javax.swing.JButton btneliminar;
     private javax.swing.JButton btnguardar;
@@ -712,7 +658,6 @@ private String accion="guardar"; // determina si la accion es guardar o editar
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -725,7 +670,6 @@ private String accion="guardar"; // determina si la accion es guardar o editar
     private javax.swing.JLabel lbltotalregistrosconsumo;
     private javax.swing.JTable tablalistado;
     private javax.swing.JTable tablalistadoconsumo;
-    private javax.swing.JTextField txtbuscar;
     private javax.swing.JTextField txtcliente;
     private javax.swing.JTextField txthabitacion;
     private javax.swing.JTextField txtidfactura;

@@ -1,6 +1,4 @@
-
 package Datos;
-
 
 public class vconsumo {
     
