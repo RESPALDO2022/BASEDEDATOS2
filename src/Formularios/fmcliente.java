@@ -148,7 +148,7 @@ public class fmcliente extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(tablalistado);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("CUI:");
+        jLabel8.setText("Nombre:");
 
         txtbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -137,8 +137,6 @@ public class fmtrabajador extends javax.swing.JInternalFrame {
         imagenfondo = new javax.swing.JLabel();
 
         setClosable(true);
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconifiable(true);
         setMaximizable(true);
 
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -170,7 +168,7 @@ public class fmtrabajador extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(tablalistado);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("CUI:");
+        jLabel8.setText("Nombre:");
 
         txtbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,7 +223,7 @@ public class fmtrabajador extends javax.swing.JInternalFrame {
                         .addComponent(btneliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnsalir)
-                        .addGap(0, 120, Short.MAX_VALUE))
+                        .addGap(0, 94, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2)))
