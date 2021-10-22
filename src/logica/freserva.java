@@ -123,6 +123,28 @@ public class freserva {
             return false;
         }
     }
+    
+    public boolean pagar(vreserva dts) {
+      sSQL = "update h_reserva set estado_reserva='pagada'" //actualizar tabla reserva
+                + "where idh_reserva=?";
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
+            pst.setInt(1, dts.getIdh_reserva()); //Enviar 1 a 1 todos los valores    
+            
+           
+            int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
+
+            if (n != 0) { //condicion para ver si se ingresaron registros
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) { //si tiene error
+            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            return false;
+        }
+    }
 
     public boolean eliminar(vreserva dts) {
         sSQL = "delete from h_reserva where idh_reserva=?";  // Borra los registros de las reservas en el ID indicado

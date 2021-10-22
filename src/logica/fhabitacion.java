@@ -144,6 +144,51 @@ public class fhabitacion {
             return false;
         }
     }
+     public boolean desocupar(vhabitacion dts) {
+        sSQL = "update h_habitacion set disponibilidad='disponible'" //actualizar tabla habitacion
+                + "where idh_habitacion=?";
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
+            pst.setInt(1, dts.getIdh_habitacion()); //Enviar 1 a 1 todos los valores
+            
+
+            int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
+
+            if (n != 0) { //condicion para ver si se ingresaron registros
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) { //si tiene error
+            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            return false;
+        }
+    }
+     
+      public boolean ocupar(vhabitacion dts) {
+        sSQL = "update h_habitacion set disponibilidad='ocupado'" //actualizar tabla habitacion
+                + "where idh_habitacion=?";
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
+            pst.setInt(1, dts.getIdh_habitacion()); //Enviar 1 a 1 todos los valores
+            
+
+            int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
+
+            if (n != 0) { //condicion para ver si se ingresaron registros
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) { //si tiene error
+            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            return false;
+        }
+    }
 
     public boolean eliminar(vhabitacion dts) {
 //        sSQL = "delete from h_habitacion where idh_habitacion=?";  // Borra los registros de la habitacion en el ID indicado

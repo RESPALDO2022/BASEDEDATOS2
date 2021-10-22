@@ -1,10 +1,17 @@
-
 package Formularios;
 
+import Datos.vfactura;
+import Datos.vhabitacion;
+import Datos.vreserva;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.fconsumo;
+import logica.ffactura;
+import logica.fhabitacion;
 import logica.fproducto;
+import logica.freserva;
 
 
 public class fmfactura extends javax.swing.JFrame {
@@ -62,51 +69,65 @@ private String accion="guardar"; // determina si la accion es guardar o editar
     }
     
     void inhabilitar (){ // Desabilita los botones para algunas operaciones
-    txtidfactura.setVisible(false);   
-    txtidreserva.setEnabled(false);
-//    txtdescripcion.setEnabled(false);
-//    txtprecio_venta.setEnabled(false);
-
+    txtidreserva.setVisible(false);
+    txtidfactura.setVisible(false);
+    txtcliente.setEnabled(false);
+    txtnumerofactura.setEnabled(false);
+    txttotalreserva.setEnabled(false);
+    txttotalpago.setEnabled(false);
+    dcfechapago.setEnabled(false);
+    txtidhabitacion.setVisible(false);
+    txthabitacion.setEnabled(false);
     
     btnguardar.setEnabled(false);
     btncancelar.setEnabled(false);
     btneliminar.setEnabled(false);
     
     txtidfactura.setText("");
-    txtidreserva.setText("");
-//    txtprecio_venta.setText("");
-//    txtdescripcion.setText("");
+    txttotalpago.setText("");
+    txtnumerofactura.setText("");
+    
     }
     
     void habilitar (){// Habilita los botones para algunas operaciones
-    txtidfactura.setVisible(false);   
-    
-    txtidreserva.setEnabled(true);
-//    txtdescripcion.setEnabled(true);
-//    txtprecio_venta.setEnabled(true);
-
+    txtidreserva.setVisible(true);
+    txtidfactura.setVisible(true);
+    txtcliente.setEnabled(true);
+    txtnumerofactura.setEnabled(true);
+    txttotalreserva.setEnabled(true);
+    txttotalpago.setEnabled(true);
+    dcfechapago.setEnabled(true);
+    txtidhabitacion.setVisible(true);
+    txthabitacion.setEnabled(true);
     
     btnguardar.setEnabled(true);
     btncancelar.setEnabled(true);
     btneliminar.setEnabled(true);
     
     txtidfactura.setText("");
-    txtidreserva.setText("");
-//    txtprecio_venta.setText("");
-//    txtdescripcion.setText("");
+    //txttotalpago.setText("");
+    txtnumerofactura.setText("");
     
     }
     
     void mostrar(String buscar){ // Realizar la busqueda
     try{
         DefaultTableModel modelo; 
-        fproducto func=new fproducto(); //llama a la clase fproducto
+        ffactura func=new ffactura(); //llama a la clase ffactura
         modelo=func.mostrar(buscar);// Instancia la funcion mostrar de fproducto
         
         tablalistado.setModel(modelo);//Asigna a la tabla los valores guardados en modelo
         ocultar_columnas(); //llama al metodo ocultar
-        lbltotalregistros.setText("Total Registros"+Integer.toString(func.totalregistros)); //Muestra en la etiqueta el total de productos registrados
-              
+        lbltotalregistros.setText("Total facturas"+Integer.toString(func.totalregistros)); //Muestra en la etiqueta el total de facturas registrados
+        
+        //mostrar los datos de los consumos
+        fconsumo func2 = new fconsumo();
+        modelo = func2.mostrar(buscar);
+        tablalistadoconsumo.setModel(modelo);
+        ocultar_columnasconsumo();
+        
+        lbltotalregistrosconsumo.setText("Total consumos: "+func2.totalregistros);
+        lbltotalconsumo.setText("Consumo total: Q. "+func2.totalconsumo);
     }catch(Exception e){
         JOptionPane.showConfirmDialog(rootPane,e);
     }
@@ -508,46 +529,71 @@ private String accion="guardar"; // determina si la accion es guardar o editar
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        if (txtidreserva.getText().length()==0){ //Valida que numero contenga datos
-            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un nombre para el producto");
-            txtidreserva.requestFocus();
+//        if (txtidreserva.getText().length()==0){ //Valida que numero contenga datos
+//            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un nombre para el producto");
+//            txtidreserva.requestFocus();
+//            return;
+//        }
+
+        if (txtnumerofactura.getText().length()==0){ //Valida que caracteristicas contenga datos
+            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un numero de factura");
+            txtnumerofactura.requestFocus();
             return;
         }
 
-//        if (txtdescripcion.getText().length()==0){ //Valida que caracteristicas contenga datos
-//            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar una descripción para el producto");
-//            txtdescripcion.requestFocus();
-//            return;
-//        }
+        if (txttotalpago.getText().length()==0){ //Valida que precio contenga datos
+            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un total de pago de la factura");
+            txttotalpago.requestFocus();
+            return;
+        }
 
-//        if (txtprecio_venta.getText().length()==0){ //Valida que precio contenga datos
-//            JOptionPane.showConfirmDialog(rootPane, "Debe ingresar precio del producto");
-//            txtprecio_venta.requestFocus();
-//            return;
-//        }
-
-//        vproductos dts = new vproductos();//Crea un nuevo objeto de la clase vproductos
-//        fproducto func = new fproducto();//Llama a todas las funciones de fproductos
+        vfactura dts = new vfactura();//Crea un nuevo objeto de la clase vproductos
+        ffactura func = new ffactura();//Llama a todas las funciones de fproductos
 
         //Se asigna los datos de las cajas de texto a las variables
-//        dts.setNombre(txtidreserva.getText());
-//        dts.setDescripcion(txtdescripcion.getText());
-//        dts.setPrecio(Double.parseDouble(txtprecio_venta.getText()));
-
+        dts.setIdh_reserva(Integer.parseInt(txtidreserva.getText()));
+        dts.setNumero(txtnumerofactura.getText());
+        dts.setTotal(Double.parseDouble(txttotalpago.getText()));
+        
+        Calendar cal;
+        int d,m,a;
+        cal = dcfechapago.getCalendar();
+        d = cal.get(Calendar.DAY_OF_MONTH);
+        m = cal.get(Calendar.MONTH);
+        a = cal.get(Calendar.YEAR)-1990;
+        
+        dts.setFecha(new Date (a,m,d));
+        
         if (accion.equals("guardar")){//Condicion para verificar si se va a guardar o modificar
             if(func.insertar(dts)){//Verifica que los datos se esten insertando correctamente
-                JOptionPane.showMessageDialog(rootPane, "El producto fue registrado correctamente");
-                mostrar("");//Muestra todos los registros
+                JOptionPane.showMessageDialog(rootPane, "El pago por Q."+txttotalpago.getText()+
+                        " del cliente "+txtcliente.getText()+"ha sido realizado con exito");
+                mostrar(idreserva);//Muestra todos los registros
                 inhabilitar();
+                //Desocupar la habitación
+                
+                fhabitacion func2 = new fhabitacion();
+                vhabitacion dts2 = new vhabitacion();
+                
+                dts2.setIdh_habitacion(Integer.parseInt(txtidhabitacion.getText()));
+                func2.desocupar(dts2);
+                
+                //Cancelar o pagar la reserva
+                freserva func3 = new freserva();
+                vreserva dts3 = new vreserva();
+                
+                dts3.setIdh_reserva(Integer.parseInt(txtidreserva.getText()));
+                func3.pagar(dts3);
             }
 
         }
         else if(accion.equals("editar")){//Condicion para editar
-            dts.setIdh_producto(Integer.parseInt(txtidfactura.getText()));//Convierte lo del getText a un Integer
+            dts.setIdh_factura(Integer.parseInt(txtidfactura.getText()));//Convierte lo del getText a un Integer
 
             if(func.editar(dts)){
-                JOptionPane.showMessageDialog(rootPane, "El producto fue editado correctamente");
-                mostrar("");
+                JOptionPane.showMessageDialog(rootPane, "El pago del cliente. "+
+                        txtcliente.getText()+"ha sido modificado correctamente");
+                mostrar(idreserva);
                 inhabilitar();
             }
         }
@@ -567,8 +613,8 @@ private String accion="guardar"; // determina si la accion es guardar o editar
 
         txtidfactura.setText(tablalistado.getValueAt(fila, 0).toString());
         txtidreserva.setText(tablalistado.getValueAt(fila, 1).toString());
-//        txtdescripcion.setText(tablalistado.getValueAt(fila, 2).toString());
-//        txtprecio_venta.setText(tablalistado.getValueAt(fila, 3).toString());
+        txtdescripcion.setText(tablalistado.getValueAt(fila, 2).toString());
+        txtprecio_venta.setText(tablalistado.getValueAt(fila, 3).toString());
     }//GEN-LAST:event_tablalistadoMouseClicked
 
     private void txtbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbuscarActionPerformed
