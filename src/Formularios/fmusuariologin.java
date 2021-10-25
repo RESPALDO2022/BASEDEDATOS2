@@ -104,14 +104,17 @@ public class fmusuariologin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtusuarioActionPerformed
 
     private void btningresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btningresarActionPerformed
-
+    
         try {
             DefaultTableModel modelo; //declaracion de varible tipo default
             ftrabajador func = new ftrabajador(); //Llamamos a la clase ftrabajador 
             vtrabajador dts = new vtrabajador(); // clase que contiene todos los metodos setters y getters
 
             dts.setUsuario(txtusuario.getText());  // obtiene el usuario del formulario de login
-            dts.setContrasenia(txtpassword.getText()); //obtiene la contraseña del formulario de login
+            String secretKey = "Ingenieria2021"; //Clave para encriptar
+            fmtrabajador llamarEncriptar = new fmtrabajador();
+            String contraseniaEncriptada=llamarEncriptar.ecnode(secretKey, txtpassword.getText()); //Retornna contrasenia encriptada y lo almacena 
+            dts.setContrasenia(contraseniaEncriptada); //obtiene la contraseña del formulario de login
 
             modelo = func.login(dts.getUsuario(), dts.getContrasenia()); // se envian las variables a la funcion
 

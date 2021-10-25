@@ -1,9 +1,15 @@
 package Formularios;
 
 import Datos.vtrabajador;
+import java.security.MessageDigest;
+import java.util.Arrays;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.ftrabajador;
+import org.apache.commons.codec.binary.Base64;
 
 public class fmtrabajador extends javax.swing.JInternalFrame {
 
@@ -572,8 +578,50 @@ public class fmtrabajador extends javax.swing.JInternalFrame {
     private void btncancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btncancelarActionPerformed
+//METODO PARA ENCRIPTAR
+
+    public String ecnode(String secretKey, String cadena) {
+        String encriptacion = "";
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] llavePassword = md5.digest(secretKey.getBytes("utf-8"));
+            byte[] BytesKey = Arrays.copyOf(llavePassword, 24);
+            SecretKey key = new SecretKeySpec(BytesKey, "DESede");
+            Cipher cifrado = Cipher.getInstance("DESede");
+            cifrado.init(Cipher.ENCRYPT_MODE, key);
+            byte[] plainTextBytes = cadena.getBytes("utf-8");
+            byte[] buf = cifrado.doFinal(plainTextBytes);
+            byte[] base64Bytes = Base64.encodeBase64(buf);
+            encriptacion = new String(base64Bytes);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Algo salió mal");
+        }
+        return encriptacion;
+    }
+
+    public String deecnode(String secretKey, String cadenaEncriptada) {
+        String desencriptacion = "";
+        try {
+            byte[] message = Base64.decodeBase64(cadenaEncriptada.getBytes("utf-8"));
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] digestOfPassword = md5.digest(secretKey.getBytes("utf-8"));
+            byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
+            SecretKey key = new SecretKeySpec(keyBytes, "DESede");
+            Cipher decipher = Cipher.getInstance("DESede");
+            decipher.init(Cipher.DECRYPT_MODE, key);
+            byte[] plainText = decipher.doFinal(message);
+            desencriptacion = new String(plainText, "UTF-8");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Algo salió mal");
+        }
+        return desencriptacion;
+    }
+
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+        String secretKey = "Ingenieria2021";
+        fmtrabajador llamarEncriptar = new fmtrabajador();
         if (txtnombre.getText().length() == 0) { //Valida que nombre contenga datos
             JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un nombre del trabajador");
             txtnombre.requestFocus();
@@ -621,7 +669,8 @@ public class fmtrabajador extends javax.swing.JInternalFrame {
         dts.setCelular(txtcelular.getText());
         dts.setSueldo(Double.parseDouble(txtsueldo.getText())); //convierte el valor de la caja de texto a decimal
         dts.setUsuario(txtusuario.getText());
-        dts.setContrasenia(txtcontrasenia.getText());
+        String cadenaEncriptada = llamarEncriptar.ecnode(secretKey, txtcontrasenia.getText());
+        dts.setContrasenia(cadenaEncriptada);
 
         int seleccionado = cbocargo.getSelectedIndex();
         dts.setCargo((String) cbocargo.getItemAt(seleccionado));
@@ -657,10 +706,9 @@ public class fmtrabajador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtnombreActionPerformed
 
     private void cbocargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbocargoActionPerformed
-       
+
     }//GEN-LAST:event_cbocargoActionPerformed
 
-   
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
