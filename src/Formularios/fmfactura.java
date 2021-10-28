@@ -523,7 +523,7 @@ public class fmfactura extends javax.swing.JInternalFrame {
         cal = dcfechapago.getCalendar();
         d = cal.get(Calendar.DAY_OF_MONTH);
         m = cal.get(Calendar.MONTH);
-        a = cal.get(Calendar.YEAR) - 1990;
+        a = cal.get(Calendar.YEAR) - 1900;
 
         dts.setFecha(new Date(a, m, d));
 

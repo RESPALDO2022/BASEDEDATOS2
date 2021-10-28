@@ -27,7 +27,6 @@ public class fminicio extends javax.swing.JFrame {
         copyMenuItem = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         mnuconfiguraciones = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         mnusalir = new javax.swing.JMenu();
@@ -105,10 +104,6 @@ public class fminicio extends javax.swing.JFrame {
             }
         });
         mnuinicio.add(jMenuItem2);
-
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/pagos.png"))); // NOI18N
-        jMenuItem3.setText("Pagos");
-        mnuinicio.add(jMenuItem3);
 
         menuBar.add(mnuinicio);
 
@@ -236,7 +231,6 @@ public class fminicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     public static javax.swing.JLabel lblacceso;
     public static javax.swing.JLabel lblapellido;

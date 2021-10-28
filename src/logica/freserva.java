@@ -125,7 +125,7 @@ public class freserva {
     }
     
     public boolean pagar(vreserva dts) {
-      sSQL = "update h_reserva set estado_reserva='pagada'" //actualizar tabla reserva
+      sSQL = "update h_reserva set estado_reserva='PAGADA'" //actualizar tabla reserva
                 + "where idh_reserva=?";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros

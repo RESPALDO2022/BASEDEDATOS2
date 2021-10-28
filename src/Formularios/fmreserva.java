@@ -183,7 +183,7 @@ public class fmreserva extends javax.swing.JInternalFrame {
         jScrollPane2.setViewportView(tablalistado);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Producto");
+        jLabel8.setText("FECHA");
 
         txtbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,12 +243,10 @@ public class fmreserva extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lbltotalregistros)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(lbltotalregistros))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnrealizarpago)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(btnverconsumo)))
@@ -270,9 +268,9 @@ public class fmreserva extends javax.swing.JInternalFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnverconsumo)
                     .addComponent(btnrealizarpago))
@@ -379,6 +377,9 @@ public class fmreserva extends javax.swing.JInternalFrame {
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setText("Estado Reserva:");
+
+        dcfecha_reserva.setDateFormatString("dd/MM/yyyy");
+        dcfecha_reserva.setMaxSelectableDate(new java.util.Date(253370790085000L));
 
         txtcosto_alojamiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -634,19 +635,19 @@ public class fmreserva extends javax.swing.JInternalFrame {
         cal = dcfecha_reserva.getCalendar(); //obtiene fecha selccionada
         d = cal.get(Calendar.DAY_OF_MONTH);//obtiene dia del mes
         m = cal.get(Calendar.MONTH);//obtiene mes
-        a = cal.get(Calendar.YEAR) - 1990;//obtiene anio y resta 1990 para obtenerformato correcto
+        a = cal.get(Calendar.YEAR)-1900;//obtiene anio y resta 1900 para obtenerformato correcto
         dts.setFecha_reservacion(new Date(a, m, d)); //convierte a fecha
 
         cal = dcfecha_ingresa1.getCalendar(); //obtiene fecha selccionada
         d = cal.get(Calendar.DAY_OF_MONTH);//obtiene dia del mes
         m = cal.get(Calendar.MONTH);//obtiene mes
-        a = cal.get(Calendar.YEAR) - 1990;//obtiene anio y resta 1990 para obtenerformato correcto
+        a = cal.get(Calendar.YEAR) - 1900;//obtiene anio y resta 1900 para obtenerformato correcto
         dts.setFecha_ingreso(new Date(a, m, d)); //convierte a fecha
 
         cal = dcfecha_salida.getCalendar(); //obtiene fecha selccionada
         d = cal.get(Calendar.DAY_OF_MONTH);//obtiene dia del mes
         m = cal.get(Calendar.MONTH);//obtiene mes
-        a = cal.get(Calendar.YEAR) - 1990;//obtiene anio y resta 1990 para obtenerformato correcto
+        a = cal.get(Calendar.YEAR) - 1900;//obtiene anio y resta 1900 para obtenerformato correcto
         dts.setFecha_salida(new Date(a, m, d)); //convierte a fecha
 
         //Se asigna los datos de las cajas de texto a las variables
