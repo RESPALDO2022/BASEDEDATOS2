@@ -620,7 +620,7 @@ public class fmtrabajador extends javax.swing.JInternalFrame {
 
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-        String secretKey = "Ingenieria2021";
+        String secretKey = "Ingenieria2021";//llave secreta para la cantidad de encriptacion
         fmtrabajador llamarEncriptar = new fmtrabajador();
         if (txtnombre.getText().length() == 0) { //Valida que nombre contenga datos
             JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un nombre del trabajador");

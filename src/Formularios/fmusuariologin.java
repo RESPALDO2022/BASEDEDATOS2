@@ -131,7 +131,6 @@ public class fmusuariologin extends javax.swing.JFrame {
                 fminicio.lblacceso.setText(tablalistado.getValueAt(0, 5).toString());
 
                 if (!fminicio.lblacceso.getText().equals("Administrador")) { // si el cargo es diferente al Administrador
-                    fminicio.mnuconsultas.setEnabled(false);// oculta la opcion de consultas
                     fminicio.mnuconfiguraciones.setEnabled(false);// oculta la configuracion de los trabajadores
                 }
             } else {

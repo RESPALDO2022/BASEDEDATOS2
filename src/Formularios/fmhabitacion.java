@@ -36,7 +36,7 @@ public class fmhabitacion extends javax.swing.JInternalFrame {
     
     btnguardar.setEnabled(false);
     btncancelar.setEnabled(false);
-    btneliminar.setEnabled(false);
+
     
     txtidhabitacion.setText("");
     txtprecio.setText("");
@@ -55,7 +55,7 @@ public class fmhabitacion extends javax.swing.JInternalFrame {
     
     btnguardar.setEnabled(true);
     btncancelar.setEnabled(true);
-    btneliminar.setEnabled(true);
+    
     
     txtnumero.setText("");
     txtidhabitacion.setText("");
@@ -90,7 +90,6 @@ public class fmhabitacion extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         txtbuscar = new javax.swing.JTextField();
         btnbuscar = new javax.swing.JButton();
-        btneliminar = new javax.swing.JButton();
         btnsalir = new javax.swing.JButton();
         lbltotalregistros = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -163,14 +162,6 @@ public class fmhabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        btneliminar.setBackground(new java.awt.Color(235, 191, 145));
-        btneliminar.setText("Eliminar");
-        btneliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btneliminarActionPerformed(evt);
-            }
-        });
-
         btnsalir.setBackground(new java.awt.Color(235, 191, 145));
         btnsalir.setText("Salir");
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
@@ -188,17 +179,15 @@ public class fmhabitacion extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnbuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btneliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnsalir)))
                 .addContainerGap(34, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -216,9 +205,8 @@ public class fmhabitacion extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8)
                     .addComponent(txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnbuscar)
-                    .addComponent(btneliminar)
                     .addComponent(btnsalir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(lbltotalregistros)
                 .addContainerGap())
         );
@@ -489,24 +477,6 @@ public class fmhabitacion extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_btnguardarActionPerformed
 
-    private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        if(!txtidhabitacion.getText().equals("")){//Verifica que no este vacia la habitacion que se va a eliminar
-            int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Está seguro de eliminar la habitación?","Confirmar",2);//Pregunta para confirmar la eliminacion
-            
-            if(confirmacion==0){//Procede a la eliminacion 
-                fhabitacion func = new fhabitacion();
-                vhabitacion dts = new vhabitacion();
-                
-                dts.setIdh_habitacion(Integer.parseInt(txtidhabitacion.getText()));
-                
-                func.eliminar(dts);
-                mostrar("");
-                inhabilitar();
-            }
-        }
-        
-    }//GEN-LAST:event_btneliminarActionPerformed
-
     private void txtnumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnumeroActionPerformed
         txtnumero.transferFocus();//Pasa automaticamente al siguiente campo
     }//GEN-LAST:event_txtnumeroActionPerformed
@@ -526,7 +496,7 @@ public class fmhabitacion extends javax.swing.JInternalFrame {
     private void tablalistadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablalistadoMouseClicked
         btnguardar.setText("EDITAR");
         habilitar();
-        btneliminar.setEnabled(true);
+      
         accion = "editar";
         
         int fila = tablalistado.rowAtPoint(evt.getPoint());//Almacena los registros donde se haya hecho click
@@ -588,7 +558,6 @@ public class fmhabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel ImagenFondo;
     private javax.swing.JButton btnbuscar;
     private javax.swing.JButton btncancelar;
-    private javax.swing.JButton btneliminar;
     private javax.swing.JButton btnguardar;
     private javax.swing.JButton btnnuevo;
     private javax.swing.JButton btnsalir;

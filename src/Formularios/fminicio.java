@@ -28,7 +28,6 @@ public class fminicio extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        mnuconsultas = new javax.swing.JMenu();
         mnuconfiguraciones = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         mnusalir = new javax.swing.JMenu();
@@ -112,12 +111,6 @@ public class fminicio extends javax.swing.JFrame {
         mnuinicio.add(jMenuItem3);
 
         menuBar.add(mnuinicio);
-
-        mnuconsultas.setForeground(new java.awt.Color(51, 51, 0));
-        mnuconsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/consultas.jpeg"))); // NOI18N
-        mnuconsultas.setText("Reportes");
-        mnuconsultas.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        menuBar.add(mnuconsultas);
 
         mnuconfiguraciones.setForeground(new java.awt.Color(51, 51, 0));
         mnuconfiguraciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/configuracion.jpeg"))); // NOI18N
@@ -251,7 +244,6 @@ public class fminicio extends javax.swing.JFrame {
     public static javax.swing.JLabel lblnombre;
     private javax.swing.JMenuBar menuBar;
     public static javax.swing.JMenu mnuconfiguraciones;
-    public static javax.swing.JMenu mnuconsultas;
     private javax.swing.JMenu mnuinicio;
     private javax.swing.JMenu mnusalir;
     public static javax.swing.JDesktopPane principal;
