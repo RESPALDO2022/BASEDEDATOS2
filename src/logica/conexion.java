@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 public class conexion {
     
     public String db="basehotel"; // nombre de la base de datos en phpMyAdmin
-    public String url="jdbc:mysql://localhost:3308/"+db; // IP donde esta la base de datos
+    public String url="jdbc:mysql://127.0.0.1/"+db; // IP donde esta la base de datos
     
     public String user="root"; // nombre del usuario, siempre sera el mismo para xampp 
     public String pass=""; // contraseña vacia

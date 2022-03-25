@@ -5,7 +5,10 @@ import Datos.vtrabajador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -67,6 +70,7 @@ public class ftrabajador {
         sSQL2 = "insert into h_trabajador(idh_persona,sueldo,usuario,contrasenia,cargo,estado)"
                 + "values ((select idh_persona from h_persona order by idh_persona desc limit 1),?,?,?,?,?)";
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros de la clase persona
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);// prepara la cadena para poder insertar los registros de la clase trabajador
 
@@ -84,8 +88,13 @@ public class ftrabajador {
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
 
+            
             if (n != 0) { //condicion para ver si se ingresaron registros
+           
                 int n2 = pst2.executeUpdate();
+                cn.commit();
+                System.out.println("Commit Relizado");
+                
                 if (n2 != 0) {
                     return true;
                 } else {
@@ -97,7 +106,13 @@ public class ftrabajador {
             }
 
         } catch (Exception e) {   // error si 
-            JOptionPane.showConfirmDialog(null, e);//Lanza el mensaje de error
+           System.out.println(e); //lanza el mesaje de error
+             try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
         }
     }
@@ -110,6 +125,7 @@ public class ftrabajador {
                 + "where idh_persona=?";
 
         try {
+             cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);// prepara la cadena para poder insertar los registros
 
@@ -131,6 +147,8 @@ public class ftrabajador {
 
             if (n != 0) { //condicion para ver si se ingresaron registros
                 int n2 = pst2.executeUpdate();
+                cn.commit();
+                System.out.println("Commit Relizado");
                 if (n2 != 0) {
                     return true;
                 } else {
@@ -142,7 +160,13 @@ public class ftrabajador {
             }
 
         } catch (Exception e) {   // error si 
-            JOptionPane.showConfirmDialog(null, e);//Lanza el mensaje de error
+                       System.out.println(e); //lanza el mesaje de error
+             try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
         }
     }
@@ -151,6 +175,7 @@ public class ftrabajador {
         sSQL = "delete from h_trabajador where idh_persona=?";  // Borra los registros del trabajador en el ID indicado
         sSQL2 = "delete from h_persona where idh_persona=?";
         try {
+             cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);// prepara la cadena para poder insertar los registros
 
@@ -161,6 +186,8 @@ public class ftrabajador {
 
             if (n != 0) { //condicion para ver si se ingresaron registros
                 int n2 = pst2.executeUpdate();
+                cn.commit();
+                System.out.println("Commit Relizado");
                 if (n2 != 0) {
                     return true;
                 } else {
@@ -172,7 +199,13 @@ public class ftrabajador {
             }
 
         } catch (Exception e) {   // error si 
-            JOptionPane.showConfirmDialog(null, e);//Lanza el mensaje de error
+                      System.out.println(e); //lanza el mesaje de error
+             try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
         }
     }
