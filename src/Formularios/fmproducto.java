@@ -2,8 +2,13 @@
 package Formularios;
 
 import Datos.vproductos;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import logica.conexion;
 import logica.fproducto;
 
 public class fmproducto extends javax.swing.JInternalFrame {
@@ -14,6 +19,7 @@ public class fmproducto extends javax.swing.JInternalFrame {
         inhabilitar();
         
     }
+  
     
     private String accion="guardar"; // determina si la accion es guardar o editar
     
@@ -61,6 +67,7 @@ public class fmproducto extends javax.swing.JInternalFrame {
     
     void mostrar(String buscar){ // Realizar la busqueda
     try{
+        
         DefaultTableModel modelo; 
         fproducto func=new fproducto(); //llama a la clase fproducto
         modelo=func.mostrar(buscar);// Instancia la funcion mostrar de fproducto
@@ -433,6 +440,8 @@ public class fmproducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+       
+        
         if (txtnombre.getText().length()==0){ //Valida que numero contenga datos
             JOptionPane.showConfirmDialog(rootPane, "Debe ingresar un nombre para el producto");
             txtnombre.requestFocus();

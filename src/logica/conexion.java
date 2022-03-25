@@ -21,7 +21,7 @@ public class conexion {
         
         Class.forName("org.gjt.mm.mysql.Driver"); // Ruta del driver de la libreria de conexion
         link=DriverManager.getConnection(this.url,this.user,this.pass);  // enlace para la base de datos
-        
+        link.setAutoCommit(false);
     }catch(ClassNotFoundException | SQLException e){ //Excepciones específicas
         JOptionPane.showConfirmDialog(null,e); //Mensaje de error
     

@@ -5,13 +5,15 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Statement;
-import javax.swing.JOptionPane;
+//import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class fproducto {
 
-    private conexion mysql = new conexion(); //instancia para la conexion
+   private conexion mysql = new conexion(); //instancia para la conexion
     private Connection cn = mysql.conectar();// llama a la funcion conectar de la variable que instanciamos
     private String sSQL = "";//almacena la cadena de conexion
     public Integer totalregistros; // Total de registros tiene
@@ -44,7 +46,7 @@ public class fproducto {
             return modelo;   // retorna los valores del modelo si no hay ningun error
 
         } catch (Exception e) {    // Si hay un error muestra una advertencia 
-            JOptionPane.showConfirmDialog(null, e);
+            System.out.println(e);
             return null;
         }
 
@@ -54,23 +56,33 @@ public class fproducto {
         sSQL = "insert into h_producto(nombre,descripcion,precio)"
                 + "values (?,?,?)";
         try {
+            cn.setAutoCommit(false);
+            
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setString(1, dts.getNombre()); //Enviar 1 a 1 todos los valores
             pst.setString(2, dts.getDescripcion());
             pst.setDouble(3, dts.getPrecio());
-
+        
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
-
-            if (n != 0) { //condicion para ver si se ingresaron registros
+            cn.commit();
+            System.out.println("Commit Relizado");
+            
+            if (n != 0) { //condicion para ver si se ingresaron registros               
                 return true;
             } else {
                 return false;
             }
 
-        } catch (Exception e) {   // error si 
-            JOptionPane.showConfirmDialog(null, e);//Lanza el mensaje de error
+        } catch (SQLException e) {   // error si 
+            System.out.println(e);//Lanza el mensaje de error            
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
-        }
+        }  
     }
 
     public boolean editar(vproductos dts) {
@@ -78,6 +90,8 @@ public class fproducto {
                 + "where idh_producto=?";
 
         try {
+            cn.setAutoCommit(false);
+            
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setString(1, dts.getNombre()); //Enviar 1 a 1 todos los valores
             pst.setString(2, dts.getDescripcion());
@@ -85,7 +99,8 @@ public class fproducto {
             pst.setDouble(4, dts.getIdh_producto());
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
-
+            cn.commit();
+            System.out.println("Commit Relizado");
             if (n != 0) { //condicion para ver si se ingresaron registros
                 return true;
             } else {
@@ -93,7 +108,13 @@ public class fproducto {
             }
 
         } catch (Exception e) { //si tiene error
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            System.out.println(e); //lanza el mesaje de error
+             try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
         }
     }
@@ -102,10 +123,12 @@ public class fproducto {
         sSQL = "delete from h_producto where idh_producto=?";  // Borra los registros de los productos en el ID indicado
 
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL); // prepara la cadena para poder insertar los registros
             pst.setInt(1, dts.getIdh_producto());// El indice 1, es el ID producto para indicar que se elimina
             int n = pst.executeUpdate(); //almacena el estado de la ejecucucion del Statement
-
+            cn.commit();
+            System.out.println("Commit Relizado");
             if (n != 0) {   //Revisa si esta vacio
                 return true;
             } else {
@@ -113,7 +136,13 @@ public class fproducto {
             }
 
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            System.out.println(e); //lanza el mesaje de error
+             try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
         }
     }

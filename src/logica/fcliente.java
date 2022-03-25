@@ -4,7 +4,10 @@ import Datos.vcliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -61,10 +64,13 @@ public class fcliente {
 
         sSQL2 = "insert into h_cliente(idh_persona,codigo_cliente)"
                 + "values ((select idh_persona from h_persona order by idh_persona desc limit 1),?)";
+        
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);// prepara la cadena para poder insertar los registros
-
+           
+            
             pst.setString(1, dts.getNombre()); //Enviar 1 a 1 todos los valores
             pst.setString(2, dts.getApellido());
             pst.setString(3, dts.getCui());
@@ -74,9 +80,12 @@ public class fcliente {
             pst2.setString(1, dts.getCodigo_cliente());
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
-
+            
+            
             if (n != 0) { //condicion para ver si se ingresaron registros
                 int n2 = pst2.executeUpdate();
+                cn.commit();
+                System.out.println("Commit Realizado");
                 if (n2 != 0) {
                     return true;
                 } else {
@@ -84,11 +93,20 @@ public class fcliente {
                 }
 
             } else {
+                cn.rollback();
+                System.out.println("Roolbak realizado");
                 return false;
             }
-
-        } catch (Exception e) {   // error si 
-            JOptionPane.showConfirmDialog(null, e);//Lanza el mensaje de error
+           
+        } catch (Exception e) {
+              System.out.println(e); //lanza el mesaje de error
+             try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                
             return false;
         }
     }
@@ -101,6 +119,7 @@ public class fcliente {
                 + "where idh_persona=?";
 
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);// prepara la cadena para poder insertar los registros
 
@@ -117,6 +136,8 @@ public class fcliente {
 
             if (n != 0) { //condicion para ver si se ingresaron registros
                 int n2 = pst2.executeUpdate();
+                cn.commit();
+                System.out.println("Commit Realizado");
                 if (n2 != 0) {
                     return true;
                 } else {
@@ -128,7 +149,13 @@ public class fcliente {
             }
 
         } catch (Exception e) {   // error si 
-            JOptionPane.showConfirmDialog(null, e);//Lanza el mensaje de error
+           System.out.println(e); //lanza el mesaje de error
+             try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
         }
     }
@@ -137,6 +164,7 @@ public class fcliente {
         sSQL = "delete from h_cliente where idh_persona=?";  // Borra los registros del cliente en el ID indicado
         sSQL2 = "delete from h_persona where idh_persona=?";
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);// prepara la cadena para poder insertar los registros
 
@@ -147,6 +175,8 @@ public class fcliente {
 
             if (n != 0) { //condicion para ver si se ingresaron registros
                 int n2 = pst2.executeUpdate();
+                cn.commit();
+                System.out.println("Commit Realizado");
                 if (n2 != 0) {
                     return true;
                 } else {
@@ -158,7 +188,13 @@ public class fcliente {
             }
 
         } catch (Exception e) {   // error si 
-            JOptionPane.showConfirmDialog(null, e);//Lanza el mensaje de error
+           System.out.println(e); //lanza el mesaje de error
+             try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
         }
     }
