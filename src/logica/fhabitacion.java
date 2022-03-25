@@ -8,6 +8,8 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class fhabitacion {
 
@@ -52,8 +54,7 @@ public class fhabitacion {
         }
 
     }
-    
-    
+
     public DefaultTableModel mostrarvista(String buscar) {  // Mostrar los registros de la tabla habitacion
         DefaultTableModel modelo;
 
@@ -95,6 +96,7 @@ public class fhabitacion {
         sSQL = "insert into h_habitacion(numero,piso,caracteristicas,precio,tipo,disponibilidad)"
                 + "values (?,?,?,?,?,?)";
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setString(1, dts.getNumero()); //Enviar 1 a 1 todos los valores
             pst.setString(2, dts.getPiso());
@@ -104,6 +106,8 @@ public class fhabitacion {
             pst.setString(6, dts.getDisponibilidad());
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
+            cn.commit();
+            System.out.println("Commit Relizado");
 
             if (n != 0) { //condicion para ver si se ingresaron registros
                 return true;
@@ -112,8 +116,15 @@ public class fhabitacion {
             }
 
         } catch (Exception e) {   // error si 
-            JOptionPane.showConfirmDialog(null, e);//Lanza el mensaje de error
+            System.out.println(e); //lanza el mesaje de error
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
+
         }
     }
 
@@ -122,6 +133,7 @@ public class fhabitacion {
                 + "where idh_habitacion=?";
 
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setString(1, dts.getNumero()); //Enviar 1 a 1 todos los valores
             pst.setString(2, dts.getPiso());
@@ -132,6 +144,8 @@ public class fhabitacion {
             pst.setInt(7, dts.getIdh_habitacion());
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
+            cn.commit();
+            System.out.println("Commit Relizado");
 
             if (n != 0) { //condicion para ver si se ingresaron registros
                 return true;
@@ -140,20 +154,30 @@ public class fhabitacion {
             }
 
         } catch (Exception e) { //si tiene error
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            System.out.println(e); //lanza el mesaje de error
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
+
         }
     }
-     public boolean desocupar(vhabitacion dts) {
+
+    public boolean desocupar(vhabitacion dts) {
         sSQL = "update h_habitacion set disponibilidad='disponible'" //actualizar tabla habitacion
                 + "where idh_habitacion=?";
 
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setInt(1, dts.getIdh_habitacion()); //Enviar 1 a 1 todos los valores
-            
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
+            cn.commit();
+            System.out.println("Commit Relizado");
 
             if (n != 0) { //condicion para ver si se ingresaron registros
                 return true;
@@ -162,21 +186,30 @@ public class fhabitacion {
             }
 
         } catch (Exception e) { //si tiene error
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            System.out.println(e); //lanza el mesaje de error
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
+
         }
     }
-     
-      public boolean ocupar(vhabitacion dts) {
+
+    public boolean ocupar(vhabitacion dts) {
         sSQL = "update h_habitacion set disponibilidad='ocupado'" //actualizar tabla habitacion
                 + "where idh_habitacion=?";
 
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setInt(1, dts.getIdh_habitacion()); //Enviar 1 a 1 todos los valores
-            
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
+            cn.commit();
+            System.out.println("Commit Relizado");
 
             if (n != 0) { //condicion para ver si se ingresaron registros
                 return true;
@@ -185,8 +218,15 @@ public class fhabitacion {
             }
 
         } catch (Exception e) { //si tiene error
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            System.out.println(e); //lanza el mesaje de error
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
+
         }
     }
 
@@ -194,9 +234,12 @@ public class fhabitacion {
         sSQL = "delete from h_habitacion where idh_habitacion=?";  // Borra los registros de la habitacion en el ID indicado
 
         try {
-          PreparedStatement pst = cn.prepareStatement(sSQL); // prepara la cadena para poder insertar los registros
-          pst.setInt(1, dts.getIdh_habitacion());// El indice 1, es el ID habitacion para indicar que se elimina
+            cn.setAutoCommit(false);
+            PreparedStatement pst = cn.prepareStatement(sSQL); // prepara la cadena para poder insertar los registros
+            pst.setInt(1, dts.getIdh_habitacion());// El indice 1, es el ID habitacion para indicar que se elimina
             int n = pst.executeUpdate(); //almacena el estado de la ejecucucion del Statement
+            cn.commit();
+            System.out.println("Commit Relizado");
 
             if (n != 0) {   //Revisa si esta vacio
                 return true;
@@ -205,8 +248,15 @@ public class fhabitacion {
             }
 
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            System.out.println(e); //lanza el mesaje de error
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
+
         }
     }
 }

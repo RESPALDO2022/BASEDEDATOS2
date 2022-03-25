@@ -10,6 +10,8 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class freserva {
 
@@ -37,6 +39,7 @@ public class freserva {
                 "r.costo_alojamiento, r.estado_reserva from h_reserva r inner join h_habitacion h on r.idh_habitacion=h.idh_habitacion where r.fecha_reservacion like '%" + buscar + "%' order by idh_reserva desc "; //Consulta para obtener los registros de la tabla
        
         try { //declaracion de errores 
+            
             Statement st = cn.createStatement();   // asigna a la variable de tipo Statement la conexion de La BD
             ResultSet rs = st.executeQuery(sSQL); //ejecuta la consulta de arriba  
 
@@ -70,6 +73,7 @@ public class freserva {
         sSQL = "insert into h_reserva(idh_habitacion, idh_cliente, idh_trabajador, fecha_reservacion,fecha_ingreso,fecha_salida,costo_alojamiento,estado_reserva)"
                 + "values (?,?,?,?,?,?,?,?)";
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setInt(1, dts.getIdh_habitacion()); //Enviar 1 a 1 todos los valores
             pst.setInt(2, dts.getIdh_cliente());
@@ -81,6 +85,8 @@ public class freserva {
             pst.setString(8, dts.getEstado_reserva());
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
+            cn.commit();
+            System.out.println("Commit Relizado");
 
             if (n != 0) { //condicion para ver si se ingresaron registros
                 return true;
@@ -89,8 +95,15 @@ public class freserva {
             }
 
         } catch (Exception e) {   // error si 
-            JOptionPane.showConfirmDialog(null, e);//Lanza el mensaje de error
+            System.out.println(e); //lanza el mesaje de error
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
+           
         }
     }
 
@@ -98,6 +111,7 @@ public class freserva {
       sSQL = "update h_reserva set idh_habitacion=?,idh_cliente=?,idh_trabajador=?,fecha_reservacion=?,fecha_ingreso=?,fecha_salida=?,costo_alojamiento=?,estado_reserva=?" //actualizar tabla reserva
                 + "where idh_reserva=?";
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setInt(1, dts.getIdh_habitacion()); //Enviar 1 a 1 todos los valores
             pst.setInt(2, dts.getIdh_cliente());
@@ -111,6 +125,8 @@ public class freserva {
             
            
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
+            cn.commit();
+            System.out.println("Commit Relizado");
 
             if (n != 0) { //condicion para ver si se ingresaron registros
                 return true;
@@ -119,8 +135,15 @@ public class freserva {
             }
 
         } catch (Exception e) { //si tiene error
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+             System.out.println(e); //lanza el mesaje de error
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
+           
         }
     }
     
@@ -128,11 +151,14 @@ public class freserva {
       sSQL = "update h_reserva set estado_reserva='PAGADA'" //actualizar tabla reserva
                 + "where idh_reserva=?";
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setInt(1, dts.getIdh_reserva()); //Enviar 1 a 1 todos los valores    
             
            
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
+             cn.commit();
+            System.out.println("Commit Relizado");
 
             if (n != 0) { //condicion para ver si se ingresaron registros
                 return true;
@@ -141,8 +167,15 @@ public class freserva {
             }
 
         } catch (Exception e) { //si tiene error
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            System.out.println(e); //lanza el mesaje de error
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
+            
         }
     }
 
@@ -150,9 +183,12 @@ public class freserva {
         sSQL = "delete from h_reserva where idh_reserva=?";  // Borra los registros de las reservas en el ID indicado
 
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL); // prepara la cadena para poder insertar los registros
             pst.setInt(1, dts.getIdh_reserva());// El indice 1, es el ID reserva para indicar que se elimina
             int n = pst.executeUpdate(); //almacena el estado de la ejecucucion del Statement
+              cn.commit();
+            System.out.println("Commit Relizado");
 
             if (n != 0) {   //Revisa si esta vacio
                 return true;
@@ -161,8 +197,15 @@ public class freserva {
             }
 
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            System.out.println(e); //lanza el mesaje de error
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
+            
         }
     }
 
