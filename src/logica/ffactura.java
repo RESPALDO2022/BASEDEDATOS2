@@ -9,6 +9,8 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ffactura {
 
@@ -21,7 +23,7 @@ public class ffactura {
         DefaultTableModel modelo;
 
         //Guarda los títulos de la columna
-        String[] titulos = {"ID", "Idreserva", "numero", "total","fecha"};
+        String[] titulos = {"ID", "Idreserva", "numero", "total", "fecha"};
         String[] registro = new String[5];  // almacena el registro de cada columna 
 
         totalregistros = 0;
@@ -56,6 +58,7 @@ public class ffactura {
         sSQL = "insert into h_factura(idh_reserva,numero,total,fecha)"
                 + "values (?,?,?,?)";
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setInt(1, dts.getIdh_reserva()); //Enviar 1 a 1 todos los valores
             pst.setString(2, dts.getNumero());
@@ -63,7 +66,8 @@ public class ffactura {
             pst.setDate(4, (Date) dts.getFecha());
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
-
+            cn.commit();
+            System.out.println("Commit Relizado");
             if (n != 0) { //condicion para ver si se ingresaron registros
                 return true;
             } else {
@@ -71,7 +75,13 @@ public class ffactura {
             }
 
         } catch (Exception e) {   // error si 
-            JOptionPane.showConfirmDialog(null, e);//Lanza el mensaje de error
+            System.out.println(e); //lanza el mesaje de error
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
         }
     }
@@ -81,16 +91,18 @@ public class ffactura {
                 + "where idh_factura=?";
 
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);// prepara la cadena para poder insertar los registros
             pst.setInt(1, dts.getIdh_reserva()); //Enviar 1 a 1 todos los valores
             pst.setString(2, dts.getNumero());
             pst.setDouble(3, dts.getTotal());
             pst.setDate(4, (Date) dts.getFecha());
-            
+
             pst.setInt(5, dts.getIdh_factura());
 
             int n = pst.executeUpdate();//almacena el estado de la ejecucucion del Statement
-
+            cn.commit();
+            System.out.println("Commit Relizado");
             if (n != 0) { //condicion para ver si se ingresaron registros
                 return true;
             } else {
@@ -98,7 +110,13 @@ public class ffactura {
             }
 
         } catch (Exception e) { //si tiene error
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            System.out.println(e); //lanza el mesaje de error
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
         }
     }
@@ -107,10 +125,12 @@ public class ffactura {
         sSQL = "delete from h_factura where idh_factura=?";  // Borra los registros de los consuos en el ID indicado
 
         try {
+            cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL); // prepara la cadena para poder insertar los registros
             pst.setInt(1, dts.getIdh_factura());// El indice 1, es el ID factura para indicar que se elimina
             int n = pst.executeUpdate(); //almacena el estado de la ejecucucion del Statement
-
+            cn.commit();
+            System.out.println("Commit Relizado");
             if (n != 0) {   //Revisa si esta vacio
                 return true;
             } else {
@@ -118,7 +138,13 @@ public class ffactura {
             }
 
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e); //lanza el mesaje de error
+            System.out.println(e); //lanza el mesaje de error
+            try {
+                cn.rollback();
+                System.out.println("Rollback relizado");
+            } catch (SQLException ex) {
+                Logger.getLogger(fproducto.class.getName()).log(Level.SEVERE, null, ex);
+            }
             return false;
         }
     }
