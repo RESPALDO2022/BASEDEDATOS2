@@ -29,6 +29,7 @@ public class fminicio extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         mnuconfiguraciones = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         mnusalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,6 +122,15 @@ public class fminicio extends javax.swing.JFrame {
         });
         mnuconfiguraciones.add(jMenuItem4);
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/backup.jpg"))); // NOI18N
+        jMenuItem3.setText("Crear Backup");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        mnuconfiguraciones.add(jMenuItem3);
+
         menuBar.add(mnuconfiguraciones);
 
         mnusalir.setForeground(new java.awt.Color(51, 51, 0));
@@ -193,6 +203,13 @@ public class fminicio extends javax.swing.JFrame {
        this.dispose();
     }//GEN-LAST:event_mnusalirMouseClicked
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        fmbackup form= new fmbackup();
+        principal.add(form);
+        form.toFront();
+        form.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -231,6 +248,7 @@ public class fminicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     public static javax.swing.JLabel lblacceso;
     public static javax.swing.JLabel lblapellido;
